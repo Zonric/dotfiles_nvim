@@ -4,9 +4,6 @@ return {
 		lazy = false,
 		enabled = true,
 		opts = {},
-		config = function()
-			require("mason").setup()
-		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
@@ -36,3 +33,4 @@ return {
 		end,
 	},
 }
+

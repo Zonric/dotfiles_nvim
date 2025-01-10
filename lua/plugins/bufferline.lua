@@ -1,9 +1,9 @@
 return {
-	"akinsho/bufferline.nvim",
-	enabled = true,
-	lazy = false,
-	config = function()
-		require("bufferline").setup({
+	{
+		"akinsho/bufferline.nvim",
+		enabled = true,
+		lazy = false,
+		opts = {
 			options = {
 				offsets = {{
 					filetype = "neo-tree",
@@ -11,8 +11,8 @@ return {
 					text_align = "center",
 					separator = true
 				}},
-			}
-		})
-	end,
+			},
+		},
+	},
 }
 
