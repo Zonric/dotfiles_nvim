@@ -11,5 +11,11 @@ return {
     lazy = false,
 		opts = {},
 	},
+	{
+		"f-person/git-blame.nvim",
+		enabled = true,
+		lazy = false,
+		opts = {},
+	},
 }
 

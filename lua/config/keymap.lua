@@ -20,16 +20,17 @@ set( "n", "<leader>ce", vim.diagnostic.open_float, { desc = "Error messages." })
 --
 -- Explorer
 --
-set( "n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Open File Explorer" })
+set( "n", "<leader>e", "<cmd>Neotree toggle<CR>", { desc = "Open File Explorer." })
 
 set( "n", "<leader>f", "", { desc = "Find..." })
-set( "n", "<leader>ff", builtin.find_files, { desc = "Find Files with Telescope." })
-set( "n", "<leader>fg", builtin.live_grep, { desc = "Grep Files with Telescope." })
+set( "n", "<leader>ff", builtin.find_files, { desc = "Files with Telescope." })
+set( "n", "<leader>fg", builtin.live_grep, { desc = "Files with Grep in Telescope." })
 
 --
 -- Git
 --
 set( "n", "<leader>g", "", { desc = "Git..." })
+set( "n", "<leader>gb", "<cmd>GitBlameToggle<CR>", { desc = "Toggle Git Blame View." })
 set( "n", "<leader>gd", "<cmd>DiffviewOpen<CR>", { desc = "Git diff." })
 set( "n", "<leader>ge", "<cmd>DiffviewClose<CR>", { desc = "Git diff Exit."})
 set( "n", "<leader>gg", "<cmd>DiffviewFileHistory<CR>", { desc = "Git [G]it History."})

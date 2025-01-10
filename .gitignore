@@ -3,3 +3,6 @@
 
 .luarc.json
 lazy-lock.json
+
+lua/plugins/example
+
