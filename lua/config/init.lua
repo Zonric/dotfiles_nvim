@@ -36,3 +36,7 @@ require("lazy").setup({
   checker = { enabled = true, notify = false},
 	change_detection = { enabled = true, notify = false},
 })
+
+require("config.keymap")
+-- Currently unused
+--require("config.autocmds")
