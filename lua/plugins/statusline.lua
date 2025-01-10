@@ -4,26 +4,23 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		enabled = true,
 		lazy = false,
-		config = function()
-			require("lualine").setup({
-				sections = {
-					lualine_c = {
-						{
-							"filename",
-							file_status = true,
-							newfile_status = true,
-							path = 1,
-							shorting_target = 40,
-							symbols = {
-								modified = "[+]",
-								readonly = "[RO]",
-								unnamed = "[No Name]",
-								newfile = "[New]",
-							}
-						}
+		opts = {
+			sections = {
+				lualine_c = {{
+					"filename",
+					file_status = true,
+					newfile_status = true,
+					path = 1,
+					shorting_target = 40,
+					symbols = {
+						modified = "[+]",
+						readonly = "[RO]",
+						unnamed = "[No Name]",
+						newfile = "[New]",
 					}
-				}
-			})
-		end,
+				}}
+			}
+		},
 	},
 }
+
