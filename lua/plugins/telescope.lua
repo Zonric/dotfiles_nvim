@@ -2,11 +2,13 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		enabled = true,
+		lazy = false,
 		opts = {},
 	},
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		enabled = true,
+		lazy = false,
 		opts = {},
 		config = function()
 			require("telescope").setup({
