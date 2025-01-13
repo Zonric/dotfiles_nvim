@@ -1,14 +1,28 @@
 return {
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		enabled = true,
-		lazy = false,
-		opts = {
-			whitespace = {
-				remove_blankline_trail = false,
+	"shellRaining/hlchunk.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	priority = 1,
+  enabled = true,
+  lazy = false,
+  opts = {
+		chunk = {
+			enable = true,
+			style = {
+				{ fg = "#C3802B" },
 			},
-			scope = { enabled = true },
+		},
+		indent = {
+			enable = true,
+			style = {
+				{ fg = "#1D2C8B" },
+			},
+		},
+		line_num = {
+			enable = true,
+			style = "#0AB7FF",
+		},
+		blank = {
+			enable = false,
 		},
 	},
 }
