@@ -6,30 +6,36 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			{
-				"L3MON4D3/LuaSnip",
-				build = (function()
-					if vim.fn.has "win32" == 1 or vim.fn.executable "make" == 0 then
-						return
-					end
-					return "make install_jsregexp"
-				end)(),
-				dependencies = {
-					{
+				{
+					"L3MON4D3/LuaSnip",
+					build = "make install_jsregexp",
+					dependencies = {
+						"saadparwaiz1/cmp_luasnip",
 						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
+					},
+					opts = {
+						history = true,
 					},
 				},
 			},
-			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"mlaursen/vim-react-snippets",
+
+			-- For ultisnips users.
+			--"SirVer/ultisnips"
+			--"quangnguyen30192/cmp-nvim-ultisnips"
 		},
+
 		config = function()
+			--require("vim-react-snippets").lazy_load()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			luasnip.config.setup {}
+			luasnip.config.setup {
+				require("luasnip.loaders.from_vscode").lazy_load()
+			}
 
 			cmp.setup {
 				snippet = {
@@ -38,28 +44,22 @@ return {
 					end,
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
-				sources = {
+				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "codeium" },
 					{ name = "luasnip" },
 					{ name = "path" },
-				},
+				},{
+					{ name = "buffer" },
+				}),
 			}
 			--cmdline?
 			--lspconfig capabilities ?
 			local capabilities = require('cmp_nvim_lsp').default_capabilities()
-			require('lspconfig')['clangd'].setup {
-				capabilities = capabilities
-			}
-			require('lspconfig')['lua_ls'].setup {
-				capabilities = capabilities
-			}
-			require('lspconfig')['ts_ls'].setup {
-				capabilities = capabilities
-			}
-			require('lspconfig')['clangd'].setup {
-				capabilities = capabilities
-			}
+			require('lspconfig')['clangd'].setup { capabilities = capabilities }
+			require('lspconfig')['lua_ls'].setup { capabilities = capabilities }
+			require('lspconfig')['ts_ls'].setup {	capabilities = capabilities }
+			require('lspconfig')['clangd'].setup { capabilities = capabilities }
 		end,
 	},
 }

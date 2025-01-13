@@ -45,3 +45,23 @@ set( "i", "<C-p>", function() cmp.select_prev_item() end, { desc = "Index [p]rev
 set( "i", "<C-y>", function() cmp.confirm({ select = 1 }) end, { desc = "Select completion." })
 set( "i", "<C-Space>", function() cmp.complete() end, { desc = "Show completion." })
 
+-- LuaSnip
+local ls = require("luasnip")
+set({"i", "s"}, "<C-k>", function()
+	if ls.expand_or_jumpable() then
+		ls.expand_or_jump()
+	end
+end, { desc = "Jump to next item in snippet." })
+
+set({"i", "s"}, "<C-j>", function()
+	if ls.jumpable(-1) then
+		ls.jump(-1)
+	end
+end, { desc = "Jump backwards in the snippet." })
+
+set("i", "<C-l>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, { desc = "" })
+
