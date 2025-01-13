@@ -1,6 +1,4 @@
 local set = vim.keymap.set
-local builtin = require("telescope.builtin")
---set( "n", "", "", { desc = "" })
 
 -- Navigation
 set( "n", "<C-h>", "<C-w>h", { desc = "Navigate to Left Pane." })
@@ -16,6 +14,7 @@ set( "n", "<leader>ce", vim.diagnostic.open_float, { desc = "Error messages." })
 -- Explorer
 set( "n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Open File Explorer." })
 
+local builtin = require("telescope.builtin")
 set( "n", "<leader>f", "", { desc = "Find..." })
 set( "n", "<leader>ff", builtin.find_files, { desc = "Files with Telescope." })
 set( "n", "<leader>fg", builtin.live_grep, { desc = "Files with Grep in Telescope." })
@@ -23,10 +22,7 @@ set( "n", "<leader>fg", builtin.live_grep, { desc = "Files with Grep in Telescop
 -- Git
 set( "n", "<leader>g", "", { desc = "Git..." })
 set( "n", "<leader>gb", "<cmd>GitBlameToggle<cr>", { desc = "Toggle Git Blame View." })
-set( "n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Git diff." })
-set( "n", "<leader>ge", "<cmd>DiffviewClose<cr>", { desc = "Git diff Exit."})
-set( "n", "<leader>gg", "<cmd>DiffviewFileHistory<cr>", { desc = "Git [G]it History."})
-set( "n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "Git File [H]istory."})
+set( "n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Toggle Git Blame View." })
 
 -- Split Pane
 set( "n", "<leader>s", "", { desc = "Split Pane..." })
@@ -42,8 +38,10 @@ set( "n", "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { de
 set( "n", "<leader>xX", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble Diagnostics." })
 
 -- Completion
-set( "i", "<C-n>", '<cmd>lua require("cmp").select_next_item()<cr>', { desc = "Index [n]ext." })
-set( "i", "<C-p>", '<cmd>lua require("cmp").select_prev_item()<cr>', { desc = "Index [p]revious." })
-set( "i", "<C-Space>", '<cmd>lua require("cmp").complete()<cr>', { desc = "Show completion." })
-set( "i", "<C-e>", '<cmd>lua require("cmp").abort()<cr>', { desc = "Abort Selection" })
-set( "i", "<C-y>", '<cmd>lua require("cmp").confirm({ select = 1 })<cr>', { desc = "Select completion." })
+local cmp = require("cmp")
+set( "i", "<C-e>", function() cmp.abort() end, { desc = "Abort Selection" })
+set( "i", "<C-n>", function() cmp.select_next_item() end, { desc = "Index [n]ext." })
+set( "i", "<C-p>", function() cmp.select_prev_item() end, { desc = "Index [p]revious." })
+set( "i", "<C-y>", function() cmp.confirm({ select = 1 }) end, { desc = "Select completion." })
+set( "i", "<C-Space>", function() cmp.complete() end, { desc = "Show completion." })
+
