@@ -7,7 +7,7 @@ return {
 			options = {
 				offsets = {{
 					filetype = "neo-tree",
-					text = "File Explorer",
+					text = "Directory Explorer",
 					text_align = "center",
 					separator = true
 				}},
