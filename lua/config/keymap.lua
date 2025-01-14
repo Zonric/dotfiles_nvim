@@ -14,10 +14,12 @@ set( "n", "<leader>ce", vim.diagnostic.open_float, { desc = "Error messages." })
 -- Explorer
 set( "n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Open File Explorer." })
 
-local builtin = require("telescope.builtin")
+local tsbi = require("telescope.builtin")
 set( "n", "<leader>f", "", { desc = "Find..." })
-set( "n", "<leader>ff", builtin.find_files, { desc = "Files with Telescope." })
-set( "n", "<leader>fg", builtin.live_grep, { desc = "Files with Grep in Telescope." })
+set( "n", "<leader>ff", tsbi.find_files, { desc = "Files with Telescope." })
+set( "n", "<leader>fg", tsbi.live_grep, { desc = "Files with Grep in Telescope." })
+set( "n", "<leader>fp", function() tsbi.find_files({ cwd = require("lazy.core.config").options.root }) end, { desc = "Files Plugin Files." })
+set( "n", "<leader>fc", function() tsbi.find_files({ cwd = "~/.config/nvim/lua/"}) end, { desc = "Find nvimConfig Files"})
 
 -- Git
 set( "n", "<leader>g", "", { desc = "Git..." })
