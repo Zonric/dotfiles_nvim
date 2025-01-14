@@ -13,7 +13,7 @@ return {
 			ensure_installed = {
 				"angularls", "asm_lsp", "awk_ls", "bashls", "clangd", "neocmake", "csharp_ls",
 				"cssls", "dockerls", "glsl_analyzer", "gopls", "html", "htmx",
-				"intelephense", "jdtls", "jsonls", "lua_ls", "marksman", "mesonlsp",
+				"phpactor", "jdtls", "jsonls", "lua_ls", "marksman", "mesonlsp",
 				"powershell_es", "pyright", "rust_analyzer", "sqlls",
 				"svelte", "ts_ls",
 			},
@@ -28,6 +28,7 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.clangd.setup({})
 			lspconfig.lua_ls.setup({})
+			lspconfig.phpactor.setup({})
 			lspconfig.ts_ls.setup({})
 		end,
 	},
