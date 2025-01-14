@@ -1,8 +1,8 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 --- Setttings
+
 local g = vim.g
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 g.mapleader = " "

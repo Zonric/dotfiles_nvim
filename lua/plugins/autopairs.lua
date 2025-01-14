@@ -5,6 +5,11 @@ return {
 		lazy = true,
 		event = "InsertEnter",
 		opts = {},
+	},{
+		"windwp/nvim-ts-autotag",
+		enabled = true,
+		lazy = false,
+		opts = {},
 	},
 }
 
