@@ -32,7 +32,7 @@ return {
 					{ desc = " Find Files", group = "@property", action = "Telescope find_files", key = "f" },
 					{ desc = " Grep Files", group = "@property", action = "Telescope live_grep", key = "g" },
 					{ desc = " Explore Directory", group = "@property", action = "Neotree toggle", key = "e" },
-					{ desc = "󰩈 Exit NVim", group = "@property", action = "quit", key = "x" },
+					{ desc = "󰩈 Exit NVim", group = "@property", action = "quit", key = "q" },
 				},
 			},
 		},
