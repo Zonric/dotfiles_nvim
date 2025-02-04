@@ -1,23 +1,49 @@
 return {
 	{
+		"jwalton512/vim-blade",
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+		build = ":TSUpdate",
 		enabled = true,
 		lazy = false,
-		opts = {
-			ensure_installed = {
-				"bash", "c", "cpp", "css", "diff",
-				"go", "html", "javascript", "jsdoc",
-				"json", "jsonc", "lua", "luadoc",
-				"markdown", "markdown_inline", "printf",
-				"python", "query", "regex", "ruby", "sql", "toml",
-				"tsx", "typescript", "vim", "vimdoc", "xml", "yaml",
+		dependencies = {
+			{
+				"JoosepAlviste/nvim-ts-context-commentstring",
+				opts = {
+					custom_calculation = function(_, language_tree)
+						if vim.bo.filetype == "blade" and language_tree._lang ~= "javascript" and language_tree._lang ~= "php" then
+							return "{{-- %s --}}"
+						end
+					end,
+				},
 			},
-			sync_install = false,
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+		opts = {
+			ensure_installed = "all",
 			auto_install = true,
 			highlight = { enable = true },
-      indent = { enable = true },
+			indent = { enable = true },
 		},
+		config = function(_, opts)
+			---@class ParserInfo[]
+			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+			parser_config.blade = {
+				install_info = {
+					url = "https://github.com/EmranMR/tree-sitter-blade",
+					files = {
+						"src/parser.c",
+						-- 'src/scanner.cc',
+					},
+					branch = "main",
+					generate_requires_npm = true,
+					requires_generate_from_grammar = true,
+				},
+				filetype = "blade",
+			}
+			require("nvim-treesitter.configs").setup(opts)
+		end,
 	},
 }
 

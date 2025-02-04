@@ -14,7 +14,7 @@ opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.backspace = "indent,eol,start"
 opt.mouse = "a"
-opt.scrolloff = 15
+opt.scrolloff = 30
 opt.hidden = true
 opt.errorbells = false
 opt.splitright = true
@@ -50,7 +50,7 @@ opt.smartcase = true
 opt.hlsearch = false
 
 opt.undofile = true
-opt.updatetime = 250
-opt.timeoutlen = 300
+opt.updatetime = 2500
+opt.timeoutlen = 2500
 opt.inccommand = "split"
 

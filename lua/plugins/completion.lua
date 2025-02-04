@@ -1,15 +1,36 @@
 return {
 	{
+		"saghen/blink.cmp",
+		dependencies = "rafamadriz/friendly-snippets",
+		version = "*",
+		opts = {
+			keymap = { preset = "default" },
+
+			appearance = {
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = "mono",
+			},
+			signature = { enabled = true },
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+		},
+		opts_extend = { "sources.default" },
+	},{
 		"Exafunction/codeium.nvim",
 		enabled = true,
-		lazy = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		opts = {},
-	},
-	{
+		dependencies = { "saghen/blink.compat" },
+		event = "InsertEnter",
+		build = ":Codeium Auth",
+		opts = {
+			enable_cmp_source = vim.g.ai_cmp,
+			key_bindings = {
+				accept = false,
+			}
+		}
+	},{
 		"onsails/lspkind.nvim",
+		enabled = true,
 		opts = {
 			mode = "symbol_text",
 			preset = "codicons",
@@ -42,89 +63,5 @@ return {
 				Codeium = "󰆨",
 			},
 		},
-	},
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" }},
-				{ path = "lazy.nvim", words = { "LazyVim" } },
-			},
-		},
-	},
-	{
-		"L3MON4D3/LuaSnip",
-		enabled = true,
-		lazy = false,
-		build = "make install_jsregexp",
-		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
-		},
-		opts = {
-			history = true,
-		},
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		enabled = true,
-		lazy = true,
-		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-emoji",
-		},
-		opts = {},
-		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			luasnip.config.setup {
-				require("luasnip.loaders.from_vscode").lazy_load()
-			}
-
-			local lspkind = require("lspkind")
-			cmp.setup({
----@diagnostic disable-next-line: missing-fields
-				formatting = {
-					format = lspkind.cmp_format({
-						mode = "symbol_text",
-						maxwidth = {
-							menu = 50,
-							abbr = 50,
-						},
-						show_labelDetails = true,
----@diagnostic disable-next-line: unused-local
-						before = function(entry, vim_item)
-							return vim_item
-						end
-					})
-				},
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				completion = { completopt = "menu,menuone,noinsert" },
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "lazydev", group_inde = 0, },
-					{ name = "codeium" },
-					{ name = "luasnip" },
-					{ name = "path" },
-					{ name = "cmdline" },
-					{ name = "emoji" },
-				}, {
-					{ name = "buffer" },
-				}),
-			})
-		end,
 	},
 }

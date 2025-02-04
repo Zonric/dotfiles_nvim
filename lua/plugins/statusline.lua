@@ -24,3 +24,6 @@ return {
 	},
 }
 
+-- lua/lazyvim/plugins/ui.lua
+-- spiff up my lualine a bit
+
