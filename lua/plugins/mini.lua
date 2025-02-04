@@ -1,0 +1,56 @@
+return {
+	{ "echasnovski/mini.ai", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.animate", enabled = false, version = false, opts = {} },
+	{ "echasnovski/mini.bracketed", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.comment", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.cursorword", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.diff", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.icons", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.indentscope", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.notify", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.operators", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.pairs", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.splitjoin", enabled = true, version = false, opts = {} },
+	{ "echasnovski/mini.surround", enabled = true, version = false, opts = {} },
+	{
+		"echasnovski/mini.files",
+		enabled = true,
+		version = false,
+		opts = {},
+		config = function()
+			require("mini.files").setup({
+				content = {
+					filter = nil,
+					prefix = nil,
+					sort = nil,
+				},
+				mappings = {
+					close = "q",
+					go_in = "L",
+					go_in_plus = "l",
+					go_out = "H",
+					go_out_plus = "h",
+					mark_goto = "'",
+					mark_set = "m",
+					reset = "<BS>",
+					reveal_cwd = "@",
+					show_help = "g?",
+					synchronize = "=",
+					trim_left = "<",
+					trim_right = ">",
+				},
+				options = {
+					permanent_delete = true,
+					use_as_default_explorer = true,
+				},
+				windows = {
+					max_number = math.huge,
+					preview = false,
+					width_focus = 50,
+					width_nofocus = 15,
+					width_preview = 25,
+				},
+			})
+		end,
+	},
+}

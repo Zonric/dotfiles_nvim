@@ -1,8 +1,9 @@
 return {
+
 	{
 		"williamboman/mason.nvim",
 		enabled = true,
-		lazy = false,
+		event = "VeryLazy",
 		opts = {
 			ui = {
 				icons = {
@@ -12,70 +13,61 @@ return {
 				},
 			},
 			ensure_installed = {
-				"angularls",
-				"asm_lsp",
-				"awk_ls",
-				"bashls",
-				"beautysh",
-				"black",
-				"blade-formatter",
-				"clangd",
-				"cssls",
-				"emmet-ls",
-				"eslint_d",
-				"glsl_analyzer",
-				"gopls",
-				"html",
-				"htmx",
-				"intelephense",
-				"jdtls",
-				"jsonls",
-				"lua_ls",
-				"marksman",
-				"mesonlsp",
-				"neocmake",
-				"nginx-language-server",
-				"php-debug-adapter",
-				"phpactor",
-				"phpstan",
-				"pint",
-				"powershell_es",
-				"prettierd",
-				"pyright",
-				"rust_analyzer",
-				"rustywind",
-				"shellcheck",
-				"sqlls",
-				"stimulus_ls",
-				"stylua",
-				"svelte",
-				"tailwindcss-language-server",
-				"ts_ls",
+				"asm_lsp", "awk_ls", "bashls", "beautysh", "black",
+				"blade-formatter", "clangd", "codelldb", "cssls",
+				"emmet-ls", "eslint_d", "glsl_analyzer", "glslls",
+				"gopls", "html", "htmx", "intelephense", "jdtls",
+				"jsonls", "lua_ls", "marksman", "mesonlsp", "neocmake",
+				"nginx-language-server", "php-debug-adapter", "phpactor",
+				"phpstan", "pint", "powershell_es", "prettierd", "pyright",
+				"rust_analyzer", "rustywind", "shellcheck", "sqlls",
+				"stimulus_ls", "stylua", "svelte",
+				"tailwindcss-language-server", "ts_ls",
 			},
 		},
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		enabled = true,
-		lazy = false,
-		opts = {},
+		event = "VeryLazy",
+		dependencies = {
+			{
+				"folke/lazydev.nvim",
+				enabled = true,
+				event = "VeryLazy",
+				ft = "lua",
+				opts = {
+					library = {
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					},
+				},
+			},
+		},
+		opts = {
+			automatic_installation = true,
+		},
 	},
 	{
 		"neovim/nvim-lspconfig",
 		enabled = true,
-		lazy = false,
+		dependencies = {
+			"saghen/blink.cmp",
+		},
 		opts = {},
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local lspconfig = require("lspconfig")
-			lspconfig.angularls.setup({ capabilities = capabilities })
 			lspconfig.asm_lsp.setup({ capabilities = capabilities })
 			lspconfig.awk_ls.setup({ capabilities = capabilities })
 			lspconfig.bashls.setup({ capabilities = capabilities })
 			lspconfig.clangd.setup({ capabilities = capabilities })
 			lspconfig.cssls.setup({ capabilities = capabilities })
 			lspconfig.emmet_ls.setup({ capabilities = capabilities })
-			lspconfig.glsl_analyzer.setup({ capabilities = capabilities })
+			lspconfig.glsl_analyzer.setup({
+				capabilities = capabilities,
+				filetypes = { "comp", "frag", "geom", "tesc", "tese", "vert", "glsl" },
+			})
+			lspconfig.glslls.setup({ capabilities = capabilities })
 			lspconfig.gopls.setup({ capabilities = capabilities })
 			lspconfig.html.setup({ capabilities = capabilities })
 			lspconfig.htmx.setup({ capabilities = capabilities })
@@ -100,7 +92,7 @@ return {
 	{
 		"nvimtools/none-ls.nvim",
 		enabled = true,
-		lazy = false,
+		event = "VeryLazy",
 		dependencies = {
 			"nvimtools/none-ls-extras.nvim",
 		},
@@ -122,3 +114,4 @@ return {
 		end,
 	},
 }
+

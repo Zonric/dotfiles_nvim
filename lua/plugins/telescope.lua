@@ -1,14 +1,14 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		enabled = true,
+		enabled = false,
 		lazy = false,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
-		enabled = true,
+		enabled = false,
 		lazy = false,
 		opts = {},
 		config = function()

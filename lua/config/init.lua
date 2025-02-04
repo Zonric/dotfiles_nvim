@@ -23,7 +23,8 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	checker = { enabled = true, notify = false },
-	change_detection = { enabled = true, notify = false },
+	change_detection = { enabled = true, notify = true },
 })
 
+require("config.autocmds")
 require("config.keymap")

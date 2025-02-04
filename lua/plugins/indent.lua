@@ -2,7 +2,7 @@ return {
 	"shellRaining/hlchunk.nvim",
 	event = { "BufReadPre", "BufNewFile" },
 	priority = 1,
-  enabled = true,
+  enabled = false,
   lazy = false,
   opts = {
 		chunk = {
@@ -18,7 +18,7 @@ return {
 			},
 		},
 		line_num = {
-			enable = true,
+			enable = false,
 			style = "#0AB7FF",
 		},
 		blank = {
