@@ -2,26 +2,25 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		enabled = true,
-		lazy = false,
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = {},
 		opts = {},
-	},{
-		"f-person/git-blame.nvim",
-		enabled = true,
-		lazy = false,
-		opts = {
-			enabled = false,
-		},
-	},{
+		config = function() require("plugins/config/gitsigns") end,
+	},
+	{
 		"kdheepak/lazygit.nvim",
 		enabled = true,
 		lazy = true,
-		dependencies = { "nvim-lua/plenary.nvim" },
 		cmd = {
 			"LazyGit",
 			"LazyGitConfig",
 			"LazyGitCurrentFile",
 			"LazyGitFilter",
 			"LazyGitFilterCurrentFile",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
 		},
 	},
 }

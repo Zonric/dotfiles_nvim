@@ -1,22 +1,20 @@
 return {
 	{
 		"windwp/nvim-autopairs",
-		enabled = false,
+		enabled = true,
 		lazy = true,
 		event = "InsertEnter",
 		opts = {},
-	},{
+	},
+	{
 		"windwp/nvim-ts-autotag",
 		enabled = true,
-		event = "VeryLazy",
+		lazy = true,
+		event = "InsertEnter",
 		opts = {
-			aliases = {
-				["blade"] = "html",
-			}
+			opts = {
+				enable_close_on_slash = true,
+			},
 		},
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end
 	},
 }
-

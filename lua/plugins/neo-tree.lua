@@ -1,21 +1,15 @@
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
+		version = "*",
 		enabled = true,
-		lazy = false,
+		lazy = true,
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim",
 		},
-		opts = {
-			close_if_last_window = true,
-			window = {
-				position = "left",
-				width = 30,
-			},
-		},
+		opts = {},
 	},
 }
-

@@ -1,6 +1,9 @@
 return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
+		enabled = true,
+		lazy = true,
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-tree/nvim-web-devicons",
@@ -8,6 +11,8 @@ return {
 		opts = {},
 	},{
 		"toppair/peek.nvim",
+		enabled = true,
+		lazy = true,
 		event = "VeryLazy",
 		build = "deno task --quiet build:fast",
 		config = function()
