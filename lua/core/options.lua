@@ -14,12 +14,12 @@ opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.backspace = "indent,eol,start"
 opt.mouse = "a"
-opt.scrolloff = 30
+opt.scrolloff = 10
 opt.hidden = true
 opt.errorbells = false
 opt.splitright = true
 opt.splitbelow = true
-opt.iskeyword:append("-")
+opt.iskeyword:remove "_"
 
 --- Tabs
 opt.tabstop = 2
@@ -53,4 +53,3 @@ opt.undofile = true
 opt.updatetime = 2500
 opt.timeoutlen = 2500
 opt.inccommand = "split"
-
