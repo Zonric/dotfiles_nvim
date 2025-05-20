@@ -1,6 +1,8 @@
 return {
 	{
 		"jwalton512/vim-blade",
+		enabled = true,
+		lazy = false,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -8,17 +10,7 @@ return {
 		enabled = true,
 		lazy = false,
 		dependencies = {
-			{
-				"JoosepAlviste/nvim-ts-context-commentstring",
-				opts = {
-					custom_calculation = function(_, language_tree)
-						if vim.bo.filetype == "blade" and language_tree._lang ~= "javascript" and language_tree._lang ~= "php" then
-							return "{{-- %s --}}"
-						end
-					end,
-				},
-			},
-			"nvim-treesitter/nvim-treesitter-textobjects",
+			{ "nvim-treesitter/nvim-treesitter-textobjects" },
 		},
 		opts = {
 			ensure_installed = "all",
@@ -46,4 +38,3 @@ return {
 		end,
 	},
 }
-
