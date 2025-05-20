@@ -1,10 +1,5 @@
 
-.git/
+log/
 
-.luarc.json
 lazy-lock.json
-stylua.toml
-test*
-
-lua/plugins/example
 
