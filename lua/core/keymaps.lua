@@ -1,5 +1,5 @@
 local set = vim.keymap.set
--- local cmp = require("cmp")
+local cmp = require("cmp.config.mapping")
 local dap = require("dap")
 local dapui = require("dapui")
 local gitsigns = require("gitsigns")
@@ -201,11 +201,11 @@ set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 
 -- Completion
--- set("i", "<C-e>", function() cmp.abort() end, { desc = "Abort Selection" })
--- set("i", "<C-n>", function() cmp.select_next_item() end, { desc = "Index [n]ext." })
--- set("i", "<C-p>", function() cmp.select_prev_item() end, { desc = "Index [p]revious." })
--- set("i", "<C-y>", function() cmp.confirm({ select = 1 }) end, { desc = "Select completion." })
--- set("i", "<C-Space>", function() cmp.complete() end, { desc = "Show completion." })
+set("i", "<C-e>", function() cmp.abort() end, { desc = "Abort Selection" })
+set("i", "<C-n>", function() cmp.select_next_item() end, { desc = "Index [n]ext." })
+set("i", "<C-p>", function() cmp.select_prev_item() end, { desc = "Index [p]revious." })
+set("i", "<C-y>", function() cmp.confirm({ select = false }) end, { desc = "Accept currently selected completion." })
+set("i", "<C-Space>", function() cmp.complete() end, { desc = "Show completion." })
 
 -- LuaSnip
 set({ "i", "s" }, "<C-K>", function()
