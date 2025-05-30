@@ -9,19 +9,11 @@ return {
 	},
 	{
 		"onsails/lspkind.nvim",
-		opts = {
-			mode = "symbol_text",
-			preset = "codicons",
-			symbol_map = {
-				Text = "󰉿", Method = "󰆧", Function = "󰊕", Constructor = "",
-				Field = "󰜢", Variable = "󰀫", Class = "󰠱", Interface = "",
-				Module = "", Property = "󰜢", Unit = "󰑭", Value = "󰎠",
-				Enum = "", Keyword = "󰌋", Snippet = "", Color = "󰏘",
-				File = "󰈙", Reference = "󰈇", Folder = "󰉋", EnumMember = "",
-				Constant = "󰏿", Struct = "󰙅", Event = "", Operator = "󰆕",
-				TypeParameter = "", Codeium = "󰆨",
-			},
-		}
+		enabled = true,
+		lazy = false,
+		config = function()
+			require("plugins.config.completion.lspkind")
+		end,
 	},
 	{
 		"L3MON4D3/LuaSnip",
@@ -37,18 +29,6 @@ return {
 		},
 	},
 	{
-		"folke/lazydev.nvim",
-		enabled = true,
-		lazy = false,
-		ft = "lua",
-		opts = {
-			library = {
-				path = "${3rd}/luv/library",
-				words = { "vim%.uv" },
-			},
-		},
-	},
-	{
 		"hrsh7th/nvim-cmp",
 		enabled = true,
 		lazy = true,
@@ -58,10 +38,21 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
+			-- "hrsh7th/cmp-emoji",
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
-			require("plugins/config/cmp")
+			require("plugins.config.completion.cmp")
+		end,
+	},
+	{
+		"allaman/emoji.nvim",
+		ft = "markdown",
+		opts = {
+			enable_cmp_integration = true,
+		},
+		config = function(_, opts)
+			require("emoji").setup(opts)
 		end,
 	},
 }

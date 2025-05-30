@@ -4,7 +4,8 @@ local dap = require("dap")
 local dapui = require("dapui")
 local gitsigns = require("gitsigns")
 local telescope = require("telescope.builtin")
-local ls = require("luasnip")
+local luasnip = require("luasnip")
+local minifiles = require("mini.files")
 
 -- set("n", "", "", { desc = "" })
 
@@ -97,10 +98,14 @@ set("n", "<leader>du", function()
 end, { desc = "Session results." })
 
 -- Explorer
----@diagnostic disable-next-line: undefined-global
-set("n", "<leader>e", MiniFiles.open, { desc = "Open File Explorer." })
+local home_dir = vim.fn.expand("$HOME")
+local cfg_dir = vim.fn.stdpath("config")
+set("n", "<leader>e", function()
+	if not minifiles.close() then return minifiles.open() end
+end, { desc = "Toggle MiniFiles in current working directory." })
+-- Also see: <leader>m Misc for more minifile keymaps
 set("n", "\\", "<cmd>Neotree toggle<cr>", { desc = "Open File Explorer." })
-
+--
 set("n", "<leader>f", "", { desc = "Find...(Telescope)" })
 set("n", "<leader>f/", function()
 	telescope.live_grep {
@@ -154,9 +159,11 @@ set("n", "<leader>gu", gitsigns.stage_hunk, { desc = "git undo stage hunk" })
 -- Toggles
 
 -- Markdown
-set("n", "<leader>m", "", { desc = "Markdown..." })
-set("n", "<leader>mr", "<cmd>RenderMarkdown toggle<cr>", { desc = "Render (toggle)." })
-set("n", "<leader>mp", "<cmd>PeekToggle<cr>", { desc = "Toggle Peek." })
+set("n", "<leader>m", "", { desc = "Misc..." })
+set("n", "<leader>mr", "<cmd>RenderMarkdown toggle<cr>", { desc = "Markdown Render (toggle)." })
+set("n", "<leader>mp", "<cmd>PeekToggle<cr>", { desc = "Markdown toggle Peek." })
+set("n", "<leader>mc", function() minifiles.open(cfg_dir) end, { desc = "MiniFiles open Config."})
+set("n", "<leader>mh", function() minifiles.open(home_dir) end, { desc = "MiniFiles open Config."})
 
 -- Split 
 set("n", "<leader>s", "", { desc = "Split ..." })
@@ -166,28 +173,33 @@ set("n", "<leader>ss", function()
 	require("mini.splitjoin").toggle()
 end, { desc = "Structure." })
 
+-- Quit
 set("n", "<leader>q", "", { desc = "Quit..." })
-set("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit." })
+set("n", "<leader>qf", "<cmd>q!<cr>", { desc = "Force Quit." })
 set("n", "<leader>qw", "<cmd>w<cr><cmd>q<cr>", { desc = "Write and Quit." })
-set("n", "<leader>qp", "<cmd>q!<cr>", { desc = "Force Quit." })
+set("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit." })
 
 -- Quickfix
 set("n", "<leader>x", "", { desc = "Trouble..." })
 set("n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / References / ..." })
-set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Trouble Location List" })
-set("n", "<leader>xq", "<cmd>Trouble qflist<cr>", { desc = "Toggle Trouble Quickfix List." })
-set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Toggle Trouble Buffer Diagnostics." })
-set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle Trouble Diagnostics." })
+set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Trouble location list" })
+set("n", "<leader>xq", "<cmd>Trouble qflist<cr>", { desc = "Toggle trouble quickfix list." })
+set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Toggle trouble buffer diagnostics." })
+set("n", "<leader>xX", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle trouble diagnostics." })
 
 -- Move Lines
-set("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Line Down" })
-set("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Line Up" })
-set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Line Down" })
-set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Line Up" })
-set("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Line Down" })
-set("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Line Up" })
-set("v", ">", ">gv", { desc = "Increase Indentation." })
-set("v", "<", "<gv", { desc = "Decrease Indentation." })
+set("n", "<A-h>", "<h", { desc = "Decrease indentation on line." })
+set("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move line down" })
+set("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move line up" })
+set("n", "<A-l>", ">l", { desc = "Increase indentation on line." })
+
+set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move line down" })
+set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line up" })
+
+set("v", "<A-h>", "<gv", { desc = "Decrease indentation on line." })
+set("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move line down" })
+set("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move line up" })
+set("v", "<A-l>", ">gv", { desc = "Increase indentation on line." })
 
 -- Terminal
 set({ "n", "i" }, "<C-t>", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal." })
@@ -209,20 +221,20 @@ set("i", "<C-Space>", function() cmp.complete() end, { desc = "Show completion."
 
 -- LuaSnip
 set({ "i", "s" }, "<C-K>", function()
-	if ls.expand_or_jumpable() then
-		ls.expand_or_jump()
+	if luasnip.expand_or_jumpable() then
+		luasnip.expand_or_jump()
 	end
 end, { desc = "Jump to next item in snippet." })
 
 set({ "i", "s" }, "<C-J>", function()
-	if ls.jumpable(-1) then
-		ls.jump(-1)
+	if luasnip.jumpable(-1) then
+		luasnip.jump(-1)
 	end
 end, { desc = "Jump backwards in the snippet." })
 
 set("i", "<C-E>", function()
-	if ls.choice_active() then
-		ls.change_choice(1)
+	if luasnip.choice_active() then
+		luasnip.change_choice(1)
 	end
 end, { desc = "Change active choice." })
 

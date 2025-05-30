@@ -4,14 +4,17 @@ return {
 		enabled = true,
 		lazy = false,
 		config = function()
-			require("plugins/config/lsp")
+			require("plugins.config.lsp.lspconfig")
 		end,
 	},
 	{
-		"mason-org/mason.nvim",
+		"ray-x/lsp_signature.nvim",
 		enabled = true,
-		lazy = false,
-		opts = {}
+		lazy = true,
+		event = "LspAttach",
+    config = function()
+      require("plugins.config.lsp.lsp_signature")
+    end
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
@@ -21,11 +24,6 @@ return {
 			{ "mason-org/mason.nvim" },
 			{ "neovim/nvim-lspconfig" }
 		}
-	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		enabled = true,
-		lazy = false,
 	},
 	{
 		"folke/lazydev.nvim",
@@ -38,9 +36,6 @@ return {
 				words = { "vim%.uv" },
 			},
 		},
-	},
-	{
-		"j-hui/fidget.nvim", opts = {}
 	},
 }
 

@@ -74,6 +74,7 @@ vim.diagnostic.config {
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = {
 	intelephense = {},
+	marksman = {},
 	lua_ls = {
 		settings = {
 			Lua = {
@@ -86,12 +87,12 @@ local servers = {
 }
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
+	"pyright",
 	"cpptools",
 	"clangd",
 	"intelephense",
 	"blade-formatter",
 	"stylua",
-	"blade-formatter",
 })
 require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 require("mason-lspconfig").setup {
@@ -109,9 +110,9 @@ require("mason-lspconfig").setup {
 
 local lspconfig = require("lspconfig")
 lspconfig.html.setup({
-	filetypes = { "html", "php", "blade" }
+	filetypes = { "html", "blade" }
 })
 lspconfig.intelephense.setup({
-	filetypes = { "php", "blade" }
+	filetypes = { "php" }
 })
 

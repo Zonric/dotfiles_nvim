@@ -11,6 +11,12 @@ return {
 		end,
 		opts = {},
 	},
+	-- Syntax Highlighting
+	{
+		"jwalton512/vim-blade",
+		enabled = true,
+		lazy = false,
+	},
 	-- Informational Blocks
 	{
 		"akinsho/bufferline.nvim",
@@ -20,22 +26,56 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		opts = {},
-	}, {
+	},
+	{
 		"feline-nvim/feline.nvim",
 		enabled = true,
 		lazy = false,
 		dependencies = {},
 		config = function()
-			require("plugins.config.feline")
+			require("plugins.config.decor.feline")
 		end,
 	},
-	-- Greeter
+	-- Highlight Color Codes
 	{
-		"nvimdev/dashboard-nvim",
+		"brenoprata10/nvim-highlight-colors",
 		enabled = true,
 		lazy = true,
-		event = "VimEnter",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function() require("plugins/config/dashboard") end,
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {},
+	},
+	-- Highlighting current word under cursor
+	{
+		"echasnovski/mini.cursorword",
+		enabled = true,
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+    opts = {
+			delay = 250,
+		},
+	},
+	-- Chunk Highlighting
+	{
+		"echasnovski/mini.indentscope",
+		enabled = true,
+		lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+			draw = {
+				delay = 250,
+			},
+			symbol = '╎',
+		},
+	},
+	-- LSP status
+	{
+		"j-hui/fidget.nvim", opts = {}
+	},
+	-- ICONS
+	{
+		"echasnovski/mini.icons",
+		enabled = true,
+		lazy = false,
+		opts = {},
 	},
 }

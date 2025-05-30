@@ -1,5 +1,10 @@
----@diagnostic disable: undefined-field
+---@diagnostic disable: unused-local
+
 local ls = require("luasnip")
+ls.config.setup {
+	require("luasnip.loaders.from_vscode").lazy_load()
+}
+
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -12,7 +17,6 @@ local r = ls.restore_node
 ls.add_snippets("html", {
 	s({"html","blade"}, {
 		t("Static Text"),
-		f(copy, 2),
 		t({ "", "function "}),
 		i(1),
 		t("("),
@@ -22,3 +26,4 @@ ls.add_snippets("html", {
 		t({ "", "}" }),
 	}),
 })
+

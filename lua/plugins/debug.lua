@@ -11,7 +11,7 @@ return {
 			"leoluz/nvim-dap-go",
 		},
 		config = function()
-			require("plugins/config/debug")
+			require("plugins.config.debug.dap")
 		end,
 	},
 }

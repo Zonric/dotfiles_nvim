@@ -6,7 +6,7 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {},
 		opts = {},
-		config = function() require("plugins/config/gitsigns") end,
+		config = function() require("plugins.config.git.gitsigns") end,
 	},
 	{
 		"kdheepak/lazygit.nvim",
