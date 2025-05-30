@@ -15,7 +15,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("core/options")
+require("core.options")
 
 require("lazy").setup {
 	spec = {
@@ -26,6 +26,6 @@ require("lazy").setup {
 	change_detection = { enabled = true, notify = false },
 }
 
-require("core/autocmds")
-require("core/keymaps")
+require("core.autocmds")
+require("core.keymaps")
 

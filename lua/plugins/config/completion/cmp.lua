@@ -1,7 +1,4 @@
-local luasnip = require("luasnip")
-luasnip.config.setup {
-	require("luasnip.loaders.from_vscode").lazy_load()
-}
+---@diagnostic disable: unused-local
 
 local cmp = require("cmp")
 local lspkind = require("lspkind")
@@ -14,7 +11,6 @@ cmp.setup({
 				abbr = 50,
 			},
 			show_labelDetails = true,
-			---@diagnostic disable-next-line: unused-local
 			before = function(entry, vim_item)
 				return vim_item
 			end
@@ -30,7 +26,6 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-
 	mapping = cmp.mapping.preset.insert({
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -38,15 +33,15 @@ cmp.setup({
 		['<C-n>'] = cmp.mapping.select_next_item(),
 		['<C-e>'] = cmp.mapping.abort(),
 		['<C-y>'] = cmp.mapping.confirm({ select = false }),
-		['<C-Space'] = cmp.mapping.complete(),
+		['<C-Space>'] = cmp.mapping.complete(),
 	}),
 	sources = cmp.config.sources({
+		{ name = "lazydev" },
 		{ name = "nvim_lsp" },
-		{ name = "lazydev", group_index = 0, },
-		{ name = "codeium" },
-		{ name = "luasnip" },
 		{ name = "path" },
+		{ name = "luasnip" },
 		{ name = "emoji" },
+		{ name = "codeium" },
 	},{
 		{ name = "buffer" },
 	})

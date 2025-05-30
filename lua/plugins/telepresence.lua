@@ -1,4 +1,5 @@
 return {
+	-- Discord
 	{
 		"andweeb/presence.nvim",
 		enabled = true,

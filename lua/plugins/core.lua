@@ -1,9 +1,17 @@
 return {
+	-- Utility Manager
 	{
-		"jwalton512/vim-blade",
+		"mason-org/mason.nvim",
+		enabled = true,
+		lazy = false,
+		opts = {}
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		enabled = true,
 		lazy = false,
 	},
+	-- Syntax Highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -36,5 +44,13 @@ return {
 			}
 			require("nvim-treesitter.configs").setup(opts)
 		end,
+	},
+	-- Hotkey Discovery
+	{
+		"folke/which-key.nvim",
+		enabled = true,
+		lazy = true,
+		event = "VeryLazy",
+		opts = {},
 	},
 }
