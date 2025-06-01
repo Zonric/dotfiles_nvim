@@ -173,6 +173,10 @@ set("n", "<leader>ss", function()
 	require("mini.splitjoin").toggle()
 end, { desc = "Structure." })
 
+--Replace
+set("n", "<leader>r", "", { desc = "Replace..." })
+set("n", "<leader>rs", "<CMD>lua require('spectre').toggle()<CR>", { desc = "Search via spectre." })
+
 -- Quit
 set("n", "<leader>q", "", { desc = "Quit..." })
 set("n", "<leader>qf", "<cmd>q!<cr>", { desc = "Force Quit." })
