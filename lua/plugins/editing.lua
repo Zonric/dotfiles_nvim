@@ -34,5 +34,12 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {},
 	},
+	{
+		"nvim-pack/nvim-spectre",
+		enabled = true,
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {},
+	},
 }
 
