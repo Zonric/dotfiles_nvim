@@ -4,8 +4,6 @@ return {
 		enabled = true,
 		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
-		dependencies = {},
-		opts = {},
 		config = function() require("plugins.config.git.gitsigns") end,
 	},
 	{

@@ -32,6 +32,16 @@ return {
 			pcall(require("telescope").load_extension, "ui-select")
 		end,
 	},
+	-- Terminal
+	{
+		"akinsho/toggleterm.nvim",
+		enabled = true,
+		lazy = false,
+		version = "*",
+		config = function()
+			require("plugins.config.ui.toggleterm")
+		end,
+	},
 	-- Explorer
 	{
 		"echasnovski/mini.files",

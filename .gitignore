@@ -1,5 +1,8 @@
-
 .logs/
+.env/
+snippets/
+
+local-plugins/
 
 lazy-lock.json
 

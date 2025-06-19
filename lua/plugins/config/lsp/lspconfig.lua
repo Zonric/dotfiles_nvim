@@ -1,12 +1,8 @@
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function(event)
-		local map = function(keys, func, desc, mode)
-			mode = mode or "n"
-			vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-		end
 		local function client_supports_method(client, method, bufnr)
-			if vim.fn.has "nvim-0.11" == 1 then
+			if vim.fn.has("nvim-0.11") == 1 then
 				return client:supports_method(method, bufnr)
 			else
 				return client.supports_method(method, { bufnr = bufnr })
@@ -29,18 +25,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
 				callback = function(event2)
 					vim.lsp.buf.clear_references()
-					vim.api.nvim_clear_autocmds { group = "lsp-highlight", buffer = event2.buf }
+					vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
 				end,
 			})
 		end
-		if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-			map("<leader>th", function()
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-			end, "[T]oggle Inlay [H]ints")
-		end
 	end,
 })
-vim.diagnostic.config {
+vim.diagnostic.config({
 	severity_sort = true,
 	float = { border = "rounded", source = "if_many" },
 	underline = { severity = vim.diagnostic.severity.ERROR },
@@ -69,24 +60,11 @@ vim.diagnostic.config {
 			end
 		end,
 	},
-}
--- local capabilities = require("blink.cmp").get_lsp_capabilities()
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = {
-	intelephense = {},
-	marksman = {},
-	lua_ls = {
-		settings = {
-			Lua = {
-				completion = {
-					callSnippet = "Replace",
-				},
-			},
-		},
-	},
-}
-local ensure_installed = vim.tbl_keys(servers or {})
+})
+
+local ensure_installed = vim.tbl_keys({})
 vim.list_extend(ensure_installed, {
+	"gopls",
 	"pyright",
 	"cpptools",
 	"clangd",
@@ -94,25 +72,16 @@ vim.list_extend(ensure_installed, {
 	"blade-formatter",
 	"stylua",
 })
-require("mason-tool-installer").setup { ensure_installed = ensure_installed }
-require("mason-lspconfig").setup {
+require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+require("mason-lspconfig").setup({
 	ensure_installed = {}, -- explicitly set to an empty table
 	automatic_installation = true,
-	automatic_enable = true,
-	handlers = {
-		function(server_name)
-			local server = servers[server_name] or {}
-			server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-			require("lspconfig")[server_name].setup(server)
-		end,
-	},
-}
+	automatic_enable = false,
+})
 
 local lspconfig = require("lspconfig")
-lspconfig.html.setup({
-	filetypes = { "html", "blade" }
-})
-lspconfig.intelephense.setup({
-	filetypes = { "php" }
-})
-
+lspconfig.gopls.setup({})
+lspconfig.lua_ls.setup({ settings = { Lua = { completion = { callSnippet = "Replace" } } } })
+lspconfig.html.setup({ filetypes = { "html", "blade" } })
+lspconfig.intelephense.setup({ filetypes = { "php", "blade" } })
+lspconfig.marksman.setup({})

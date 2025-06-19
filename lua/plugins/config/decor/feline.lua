@@ -109,7 +109,7 @@ local c = {
 			bg = "darkblue",
 		},
 		left_sep = "block",
-		right_sep = "right_filled"
+		right_sep = "block"
 	},
 	diagnostic_errors = {
 		provider = "diagnostic_errors",
@@ -199,13 +199,6 @@ local c = {
 
 local left = {
 	c.vim_mode,
-	c.lsp_client_names,
-	c.file_size,
-	c.fileinfo,
-	c.separator,
-}
-
-local middle = {
 	c.gitBranch,
 	c.gitDiffAdded,
 	c.gitDiffRemoved,
@@ -216,12 +209,16 @@ local middle = {
 	c.diagnostic_hints,
 }
 
+local middle = {
+	c.fileinfo,
+	c.file_size,
+}
+
 local right = {
+	c.lsp_client_names,
 	c.file_type,
 	c.file_encoding,
 	c.position,
-	c.line_percentage,
-	c.scroll_bar,
 }
 
 local components = {
