@@ -1,11 +1,12 @@
 return {
 	{
-		"Exafunction/codeium.nvim",
+		"supermaven-inc/supermaven-nvim",
 		enabled = true,
 		lazy = true,
 		event = "InsertEnter",
-		dependencies = { "nvim-lua/plenary.nvim", },
-		opts = {},
+		config = function()
+			require("plugins.config.completion.supermaven-nvim")
+		end,
 	},
 	{
 		"onsails/lspkind.nvim",
@@ -18,7 +19,8 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		enabled = true,
-		lazy = false,
+		lazy = true,
+		event = "InsertEnter",
 		build = "make install_jsregexp",
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip",
@@ -27,18 +29,20 @@ return {
 		opts = {
 			history = true,
 		},
+		config = function()
+			require("luasnip.loaders.from_lua").lazy_load({ paths = { tostring(vim.fn.expand("$HOME/.config/nvim/snippets")) } })
+		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
 		enabled = true,
-		lazy = true,
+		lazy = false,
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			-- "hrsh7th/cmp-emoji",
 			"neovim/nvim-lspconfig",
 		},
 		config = function()
@@ -46,13 +50,18 @@ return {
 		end,
 	},
 	{
+		"chrisgrieser/cmp-nerdfont",
+		enabled = true,
+		lazy = true,
+		event = "InsertEnter",
+	},
+	{
 		"allaman/emoji.nvim",
-		ft = "markdown",
-		opts = {
-			enable_cmp_integration = true,
-		},
-		config = function(_, opts)
-			require("emoji").setup(opts)
+		enabled = true,
+		lazy = true,
+		event = "InsertEnter",
+		config = function()
+			require("plugins.config.completion.emoji")
 		end,
 	},
 }

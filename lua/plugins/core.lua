@@ -4,12 +4,13 @@ return {
 		"mason-org/mason.nvim",
 		enabled = true,
 		lazy = false,
-		opts = {}
+		opts = {},
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		enabled = true,
 		lazy = false,
+		opts = {},
 	},
 	-- Syntax Highlighting
 	{

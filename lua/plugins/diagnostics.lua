@@ -25,5 +25,14 @@ return {
 			require("plugins.config.diagnostics.todo-comments")
 		end
 	},
+	{
+		dir = vim.fn.stdpath("config") .. "/local-plugins/theme-lint",
+		name = "theme-lint",
+		enabled = true,
+		lazy = false,
+		config = function()
+			require("plugins.config.diagnostics.theme-lint")
+		end,
+	}
 }
 

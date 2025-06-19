@@ -2,12 +2,61 @@ require("lspkind").init({
 	mode = "symbol_text",
 	preset = "codicons",
 	symbol_map = {
-		Text = "", Method = "󰆧", Function = "󰊕", Constructor = "",
-		Field = "󰜢", Variable = "󰀫", Class = "󰠱", Interface = "",
-		Module = "", Property = "", Unit = "󰑭", Value = "󰎠",
-		Enum = "", Keyword = "󰌋", Snippet = "", Color = "󰏘",
-		File = "󰈙", Reference = "󰈇", Folder = "󰉋", EnumMember = "",
-		Constant = "󰏿", Struct = "󰙅", Event = "", Operator = "󰆕",
+		Text        = "",
+		Method      = "󰆧",
+		Function    = "󰊕",
+		Constructor = "",
+		Field       = "󰜢",
+		Variable    = "󰀫",
+		Class       = "󰠱",
+		Interface   = "",
+		Module      = "",
+		Property    = "",
+		Unit        = "󰑭",
+		Value       = "󰎠",
+		Enum        = "",
+		Keyword     = "󰌋",
+		Snippet     = "",
+		Color       = "󰏘",
+		File        = "󰈙",
+		Reference   = "󰈇",
+		Folder      = "󰉋",
+		EnumMember  = "",
+		Constant    = "󰏿",
+		Struct      = "󰙅",
+		Event       = "",
+		Operator    = "󰆕",
+		Emoji       = "😛",
+		Supermaven  = "󰦥",
 	},
 })
+
+local hl = vim.api.nvim_set_hl
+local ns = 0
+hl(ns, "CmpItemKindText",         { fg = "#c0caf5" })
+hl(ns, "CmpItemKindMethod",       { fg = "#7aa2f7" })
+hl(ns, "CmpItemKindFunction",     { fg = "#7dcfff" })
+hl(ns, "CmpItemKindConstructor",  { fg = "#bb9af7" })
+hl(ns, "CmpItemKindField",        { fg = "#e0af68" })
+hl(ns, "CmpItemKindVariable",     { fg = "#c0caf5" })
+hl(ns, "CmpItemKindClass",        { fg = "#f7768e" })
+hl(ns, "CmpItemKindInterface",    { fg = "#9ece6a" })
+hl(ns, "CmpItemKindModule",       { fg = "#2ac3de" })
+hl(ns, "CmpItemKindProperty",     { fg = "#e0af68" })
+hl(ns, "CmpItemKindUnit",         { fg = "#ff9e64" })
+hl(ns, "CmpItemKindValue",        { fg = "#73daca" })
+hl(ns, "CmpItemKindEnum",         { fg = "#fab387" })
+hl(ns, "CmpItemKindKeyword",      { fg = "#9d7cd8" })
+hl(ns, "CmpItemKindSnippet",      { fg = "#565f89" })
+hl(ns, "CmpItemKindColor",        { fg = "#f7768e" })
+hl(ns, "CmpItemKindFile",         { fg = "#a9b1d6" })
+hl(ns, "CmpItemKindReference",    { fg = "#7aa2f7" })
+hl(ns, "CmpItemKindFolder",       { fg = "#7dcfff" })
+hl(ns, "CmpItemKindEnumMember",   { fg = "#fab387" })
+hl(ns, "CmpItemKindConstant",     { fg = "#ff9e64" })
+hl(ns, "CmpItemKindStruct",       { fg = "#9ece6a" })
+hl(ns, "CmpItemKindEvent",        { fg = "#f7768e" })
+hl(ns, "CmpItemKindOperator",     { fg = "#89ddff" })
+hl(ns, "CmpItemKindEmoji",        { fg = "#f2cdcd" })
+hl(ns, "CmpItemKindSupermaven",   { fg = "#9d7cd8" })
 

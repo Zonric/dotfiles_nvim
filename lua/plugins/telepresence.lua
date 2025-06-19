@@ -2,7 +2,7 @@ return {
 	-- Discord
 	{
 		"andweeb/presence.nvim",
-		enabled = true,
+		enabled = false,
 		lazy = false,
 		opts = {
 			auto_update = true,
@@ -24,6 +24,15 @@ return {
 			reading_text = "Reading %s",
 			workspace_text = "Working on %s",
 			line_number_text = "Line %s out of %s",
+		},
+		{
+			"vyfor/cord.nvim",
+			enabled = true,
+			lazy = false,
+			build = ":Cord update",
+			config = function()
+				require("plugins.config.telepresence.cord")
+			end,
 		},
 	},
 }

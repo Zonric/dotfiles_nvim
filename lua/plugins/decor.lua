@@ -6,8 +6,10 @@ return {
 		lazy = false,
 		priority = 999,
 		init = function()
-			vim.cmd.colorscheme "nightfox"
-			vim.api.nvim_set_hl(0, "CursorLine", { bg = "#131a24", underline = true })
+			-- local theme = require("utils.theme").load(vim.fn.expand("~/.config/themes/active"))
+			vim.cmd.colorscheme("nightfox")
+			vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2E3C50", underline = true })
+			-- vim.api.nvim_set_hl(0, "Normal", { fg = theme.fg, bg = theme.bg })
 		end,
 		opts = {},
 	},
@@ -28,8 +30,18 @@ return {
 		opts = {},
 	},
 	{
-		"feline-nvim/feline.nvim",
+		"rebelot/heirline.nvim",
 		enabled = true,
+		lazy = false,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"linrongbin16/commons.nvim",
+		},
+		config = function() require("plugins.config.decor.heirline") end,
+	},
+	{
+		"feline-nvim/feline.nvim",
+		enabled = false,
 		lazy = false,
 		dependencies = {},
 		config = function()
