@@ -61,7 +61,7 @@ M.normal = {
 	["<C-n>"] = M.selection_next,
 	["<C-p>"] = M.selection_prev,
 	["<C-y>"] = M.confirm_first,
-	["<CR>"]  = M.confirm_selected_or_newline,
+	["<CR>"] = M.confirm_selected,
 }
 
 --- Key mapping for cmp in commandline modes:
@@ -70,7 +70,7 @@ M.cmdline = {
 	["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "c" }),
 	["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "c" }),
 	["<C-y>"] = cmp.mapping(M.confirm_first, { "c" }),
-	["<CR>"]  = cmp.mapping(M.confirm_selected, { "c" }),
+	["<CR>"] = cmp.mapping(M.confirm_selected, { "c" }),
 }
 
 return M

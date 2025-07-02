@@ -61,8 +61,9 @@ return {
 		lazy = true,
 		event = "InsertEnter",
 		config = function()
-			require("plugins.config.completion.emoji")
+			require("emoji").setup({
+				enable_cmp_integration = true,
+			})
 		end,
 	},
 }
-

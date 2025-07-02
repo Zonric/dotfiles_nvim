@@ -12,14 +12,14 @@ cmp.setup({
 			})(entry, vim_item)
 
 			local source_labels = {
-				lazydev    = "Lazy",
-				nvim_lsp   = "NORMAL",
-				luasnip    = "Snip",
-				buffer     = "Buff",
-				path       = "Path",
-				nvim_lua   = "Lua",
-				emoji      = "Emoji",
-				calc       = "Calc",
+				lazydev = "Lazy",
+				nvim_lsp = "NORMAL",
+				luasnip = "Snip",
+				buffer = "Buff",
+				path = "Path",
+				nvim_lua = "Lua",
+				emoji = "Emoji",
+				calc = "Calc",
 				treesitter = "TreeSit",
 			}
 
@@ -64,26 +64,27 @@ cmp.setup({
 	},
 	mapping = cmp.mapping.preset.insert(cmp_mappings.normal),
 
-	-- 🐂 This Ox is looking at you! You should be in fear ☠️ 
+	-- 🐂 This Ox is looking at you! You should be in fear ☠️
+	-- :
 	sources = cmp.config.sources({
-		{ name = "lazydev",    priority =   10 },
-		{ name = "nvim_lsp",   priority =   20 },
-		{ name = "supermaven", priority =  350 },
-		{ name = "path",       priority =  600 },
-		{ name = "luasnip",    priority =  700 },
-		{ name = "nerdfont",   priority =  800 },
-		{ name = "emoji",      priority =  900 },
-		{ name = "copilot",    priority = 1000 },
-	},{
+		{ name = "lazydev", priority = 10 },
+		{ name = "nvim_lsp", priority = 20 },
+		{ name = "supermaven", priority = 350 },
+		{ name = "path", priority = 600 },
+		{ name = "luasnip", priority = 700 },
+		{ name = "nerdfont", priority = 800 },
+		{ name = "emoji", priority = 900 },
+		{ name = "copilot", priority = 1000 },
+	}, {
 		{ name = "buffer", priority = 500 },
-	})
+	}),
 })
 
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(cmp_mappings.cmdline),
 	sources = {
-		{ name = 'buffer' },
-	}
+		{ name = "buffer" },
+	},
 })
 
 cmp.setup.cmdline(":", {
