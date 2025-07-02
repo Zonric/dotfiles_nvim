@@ -64,7 +64,6 @@ vim.diagnostic.config({
 
 local ensure_installed = vim.tbl_keys({})
 vim.list_extend(ensure_installed, {
-	"gopls",
 	"pyright",
 	"cpptools",
 	"clangd",

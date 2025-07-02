@@ -1,6 +1,4 @@
 local set = vim.keymap.set
-local dap = require("dap")
-local dapui = require("dapui")
 local gitsigns = require("gitsigns")
 local telescope = require("telescope.builtin")
 local telescope_ext = require("telescope").load_extension("emoji")
@@ -103,53 +101,6 @@ end, { desc = "Toggle CodeCopy include file path." })
 set("n", "<leader>cu", function()
 	require("codecopy.ui").open()
 end, { desc = "Open codecopy ui" })
-
---
--- Debugger
---
-
--- Eval var under cursor
-set("n", "<leader>?", function()
-	---@diagnostic disable-next-line: missing-fields
-	require("dapui").eval(nil, { enter = true })
-end)
-
-set("n", "<F1>", dap.continue, { desc = "Continue" })
-set("n", "<F2>", dap.step_into, { desc = "Step into" })
-set("n", "<F3>", dap.step_over, { desc = "Step over" })
-set("n", "<F4>", dap.step_out, { desc = "Step out" })
-set("n", "<F5>", dap.step_back, { desc = "Step back" })
-set("n", "<F8>", dap.restart, { desc = "Restart debugger" })
-
-set("n", "<leader>d", "", { desc = "Debugger..." })
-set("n", "<leader>dc", function()
-	dap.run_to_cursor()
-end, { desc = "Run to cursor." })
-set("n", "<leader>dd", function()
-	dap.continue()
-end, { desc = "Debug (Start/Continue)" })
-set("n", "<leader>ds", function()
-	dap.step_into()
-end, { desc = "Step into." })
-set("n", "<leader>dl", function()
-	require("osv").launch({ port = 8086 })
-end, { desc = "Debugger Lua" })
-set("n", "<leader>do", function()
-	dap.step_over()
-end, { desc = "Step over." })
-set("n", "<leader>dO", function()
-	dap.step_out()
-end, { desc = "Step out." })
-set("n", "<leader>dp", function()
-	dap.toggle_breakpoint()
-end, { desc = "Breakpoint." })
-set("n", "<leader>dP", function()
-	dap.toggle_breakpoint(vim.fn.input("Breakpoiint condition: "))
-end, { desc = "Breakpoint conditional." })
-set("n", "<leader>du", function()
-	dapui.toggle()
-end, { desc = "Session results." })
-set("n", "<leader>dv", "<CMD>DapVirtualTextToggle<CR>", { desc = "Toggle Debug virtual text" })
 
 -- Explorer
 set("n", "<leader>e", function()
