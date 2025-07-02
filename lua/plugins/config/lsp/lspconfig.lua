@@ -83,5 +83,16 @@ local lspconfig = require("lspconfig")
 lspconfig.gopls.setup({})
 lspconfig.lua_ls.setup({ settings = { Lua = { completion = { callSnippet = "Replace" } } } })
 lspconfig.html.setup({ filetypes = { "html", "blade" } })
-lspconfig.intelephense.setup({ filetypes = { "php", "blade" } })
+lspconfig.intelephense.setup({
+	filetypes = { "php", "blade" },
+	settings = {
+		intelephense = {
+			environment = {},
+			format = {
+				braces = "k&r",
+				quotes = "double",
+			},
+		},
+	},
+})
 lspconfig.marksman.setup({})
