@@ -1,14 +1,5 @@
 return {
-	{ -- Mason : LSP, DAP, Linter, and Formatter manager.
-		"mason-org/mason.nvim",
-		enabled = true,
-		lazy = false,
-		config = function()
-			require("plugins.config.lsp.mason")
-		end,
-		opts = {},
-	},
-	{ -- LSP CONFIGS
+	{
 		"neovim/nvim-lspconfig",
 		enabled = true,
 		lazy = false,
@@ -16,16 +7,25 @@ return {
 			require("plugins.config.lsp.lspconfig")
 		end,
 	},
-	{ -- LSP Signature helper.
+	{
 		"ray-x/lsp_signature.nvim",
 		enabled = true,
 		lazy = true,
 		event = "LspAttach",
-		config = function()
-			require("plugins.config.lsp.lsp_signature")
-		end,
+    config = function()
+      require("plugins.config.lsp.lsp_signature")
+    end
 	},
-	{ -- LazyNvim LSP
+	{
+		"mason-org/mason-lspconfig.nvim",
+		enabled = true,
+		lazy = false,
+		dependencies = {
+			{ "mason-org/mason.nvim" },
+			{ "neovim/nvim-lspconfig" }
+		}
+	},
+	{
 		"folke/lazydev.nvim",
 		enabled = true,
 		lazy = false,
@@ -38,3 +38,4 @@ return {
 		},
 	},
 }
+

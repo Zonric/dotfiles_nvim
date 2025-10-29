@@ -1,17 +1,6 @@
 local lint = require("lint")
 lint.linters_by_ft = {
 	markdown = { "markdownlint" },
-	json = { "jsonlint" },
-	--clojure = { "clj-kondo" },
-	--dockerfile = { "hadolint" },
-	--inko = { "inko" },
-	--janet = { "janet" },
-	--json = { "jsonlint" },
-	--markdown = { "vale" },
-	--rst = { "vale" },
-	--ruby = { "ruby" },
-	--terraform = { "tflint" },
-	--text = { "vale" }
 }
 -- You can disable the default linters by setting their filetypes to nil:
 -- lint.linters_by_ft['clojure'] = nil

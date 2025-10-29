@@ -14,15 +14,23 @@ require("mini.files").setup({
 		trim_left = "<",
 		trim_right = ">",
 	},
-  options = {
-    use_libuv_file_watcher = true,
+	options = {
+		use_libuv_file_watcher = true,
+	},
+	windows = {
+		preview = true,
+		width_focus = 50,
+		width_nofocus = 20,
+		width_preview = 50,
 	},
 
 	vim.api.nvim_create_autocmd("User", {
 		pattern = "MiniFilesBufferCreate",
 		callback = function(args)
-			local map_buf = function(lhs, rhs) vim.keymap.set("n", lhs, rhs, { buffer = args.data.buf_id }) end
+			local map_buf = function(lhs, rhs)
+				vim.keymap.set("n", lhs, rhs, { buffer = args.data.buf_id })
+			end
 			map_buf("<Esc>", MiniFiles.close)
 		end,
-	})
+	}),
 })
