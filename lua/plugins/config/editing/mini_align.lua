@@ -1,4 +1,4 @@
-require("mini.align").setup {
+require("mini.align").setup({
 	mappings = {
 		start = "",
 		start_with_preview = "",
@@ -6,4 +6,4 @@ require("mini.align").setup {
 	options = {
 		split_pattern = "=",
 	},
-}
+})

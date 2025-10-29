@@ -1,3 +1,6 @@
+local cmp_lsp = require("cmp_nvim_lsp")
+local capabilities = vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	callback = function(event)
@@ -31,6 +34,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
+
 vim.diagnostic.config({
 	severity_sort = true,
 	float = { border = "rounded", source = "if_many" },
@@ -62,28 +66,40 @@ vim.diagnostic.config({
 	},
 })
 
-local ensure_installed = vim.tbl_keys({})
-vim.list_extend(ensure_installed, {
-	"gopls",
-	"pyright",
-	"cpptools",
-	"clangd",
+local lsp_table = {
+	"lua_ls",
 	"intelephense",
-	"blade-formatter",
-	"stylua",
-})
-require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-require("mason-lspconfig").setup({
-	ensure_installed = {}, -- explicitly set to an empty table
-	automatic_installation = true,
-	automatic_enable = false,
+	"pyright",
+	"tailwindcss",
+	"docker_compose_language_service",
+	"dockerls",
+	"html",
+	"cssls",
+	"clangd",
+}
+
+vim.lsp.config("*", {
+	capabilities = capabilities,
 })
 
-local lspconfig = require("lspconfig")
-lspconfig.gopls.setup({})
-lspconfig.lua_ls.setup({ settings = { Lua = { completion = { callSnippet = "Replace" } } } })
-lspconfig.html.setup({ filetypes = { "html", "blade" } })
-lspconfig.intelephense.setup({
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			completion = {
+				callSnippet = "Replace",
+			},
+		},
+	},
+})
+
+vim.lsp.config("html", {
+	filetypes = {
+		"html",
+		"blade",
+	},
+})
+
+vim.lsp.config("intelephense", {
 	filetypes = { "php", "blade" },
 	settings = {
 		intelephense = {
@@ -95,4 +111,5 @@ lspconfig.intelephense.setup({
 		},
 	},
 })
-lspconfig.marksman.setup({})
+
+vim.lsp.enable(lsp_table)

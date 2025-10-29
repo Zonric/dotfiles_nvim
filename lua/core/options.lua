@@ -19,7 +19,7 @@ opt.hidden = true
 opt.errorbells = false
 opt.splitright = true
 opt.splitbelow = true
-opt.iskeyword:remove "_"
+-- opt.iskeyword:remove "_"
 
 --- Tabs
 opt.tabstop = 2

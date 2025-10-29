@@ -1,0 +1,8 @@
+-- local theme = require("utils.theme").load(vim.fn.expand("~/.config/themes/active"))
+vim.cmd.colorscheme("carbonfox")
+-- vim.api.nvim_set_hl(0, "Normal", { fg = theme.fg, bg = theme.bg })
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2E3C50", underline = true })
+vim.api.nvim_set_hl(0, "MiniCursorword", { fg = "#ff4488", bg = "NONE", underline = true })
+vim.api.nvim_set_hl(0, "Visual", { bg = "#235c63", fg = "NONE" })
+vim.api.nvim_set_hl(0, "@punctuation.bracket.php", { fg = "#cb9405", bold = true })
+vim.api.nvim_set_hl(0, "@tag.blade", { fg = "#679e01", bold = true })
