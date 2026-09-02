@@ -1,76 +1,74 @@
 return {
 	{
-		"rcarriga/nvim-notify",
+		"nvim-mini/mini.files",
 		enabled = true,
-		lazy = false,
-		opts = {},
-		config = function()
-			vim.notify = require("notify")
-		end,
-	},
-	-- Pickers
-	{
-		"nvim-telescope/telescope.nvim",
-		enabled = true,
-		lazy = true,
-		event = "VimEnter",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = function() return vim.fn.executable "make" == 1 end, },
-			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+		opts = {
+			mappings = {
+				close = 'q',
+				go_in = 'l',
+				go_in_plus  = '<CR>',
+				go_out      = 'h',
+				go_out_plus = '<BS>',
+				mark_goto   = "'",
+				mark_set    = 'm',
+				reset       = 'R',
+				reveal_cwd  = '@',
+				show_help   = 'g?',
+				synchronize = '=',
+				trim_left   = '<',
+				trim_right  = '>',
+			},
 		},
-		config = function()
-			require("telescope").setup {
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown(),
-					},
+	},
+	{
+		"akinsho/bufferline.nvim",
+		enabled = true,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		enabled = true,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			options = {
+				disabled_filetypes = {
+					statusline = { "dashboard", "alpha", "NvimTree" },
+					winbar = {},
 				},
-			}
-			pcall(require("telescope").load_extension, "fzf")
-			pcall(require("telescope").load_extension, "ui-select")
-		end,
+				globalstatus = true,
+			},
+			sections = {
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = {
+					{
+						function()
+							return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+						end,
+						icon = "󰉋",
+					},
+					{ "filename", path = 1 },
+				},
+				lualine_x = { "searchcount", "filesize" },
+				lualine_y = { "location", "filetype" },
+				lualine_z = { "lsp_status" },
+			},
+			inactive_sections = {
+				lualine_a = {},
+				lualine_b = {},
+				lualine_c = { "filename" },
+				lualine_x = { "location" },
+				lualine_y = {},
+				lualine_z = {},
+			},
+		},
 	},
-	-- Terminal
 	{
-		"akinsho/toggleterm.nvim",
-		enabled = true,
-		lazy = false,
-		version = "*",
-		config = function()
-			require("plugins.config.ui.toggleterm")
-		end,
-	},
-	-- Explorer
-	{
-		"echasnovski/mini.files",
-		enabled = true,
-		lazy = false,
-		config = function()
-			require("plugins.config.ui.mini.files")
-		end
-	},
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		version = "*",
+		"folke/which-key.nvim",
 		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
-		},
 		opts = {},
-	},
-	-- Greeter
-	{
-		"nvimdev/dashboard-nvim",
-		enabled = true,
-		lazy = true,
-		event = "VimEnter",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function() require("plugins.config.ui.dashboard") end,
 	},
 }

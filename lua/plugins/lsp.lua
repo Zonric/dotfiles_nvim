@@ -1,40 +1,56 @@
 return {
-	{ -- Mason : LSP, DAP, Linter, and Formatter manager.
+	{
 		"mason-org/mason.nvim",
 		enabled = true,
-		lazy = false,
-		config = function()
-			require("plugins.config.lsp.mason")
-		end,
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			-- "ray-x/lsp_signature.nvim",
+		},
 		opts = {},
-	},
-	{ -- LSP CONFIGS
-		"neovim/nvim-lspconfig",
-		enabled = true,
-		lazy = false,
 		config = function()
-			require("plugins.config.lsp.lspconfig")
+			-- Selectivly allow LSP formatting capabilities.
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(args)
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+					if not client or not client.server_capabilities then
+						return
+					end
+
+					local allowed = { lua_ls = true }
+					if not allowed[client.name] then
+						client.server_capabilities.documentFormattingProvider = false
+						client.server_capabilities.documentRangeFormattingProvider = false
+					end
+				end,
+			})
+			require("mason").setup({
+				ui = {
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+				},
+			})
 		end,
 	},
-	{ -- LSP Signature helper.
-		"ray-x/lsp_signature.nvim",
-		enabled = true,
-		lazy = true,
-		event = "LspAttach",
-		config = function()
-			require("plugins.config.lsp.lsp_signature")
-		end,
-	},
-	{ -- LazyNvim LSP
-		"folke/lazydev.nvim",
-		enabled = true,
-		lazy = false,
-		ft = "lua",
+	{
+		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			library = {
-				path = "${3rd}/luv/library",
-				words = { "vim%.uv" },
+			ensure_installed = {
+				"bashls",
+				"clangd",
+				"cssls",
+				"html",
+				"intelephense",
+				"laravel_ls",
+				"lua_ls",
+				"phpactor",
+				"pyright",
+				"twiggy_language_server",
+				"gopls",
 			},
+			automatic_enable = true,
 		},
 	},
 }

@@ -1,69 +1,72 @@
 return {
 	{
-		"supermaven-inc/supermaven-nvim",
-		enabled = false,
-		lazy = true,
-		event = "InsertEnter",
-		config = function()
-			require("plugins.config.completion.supermaven-nvim")
-		end,
-	},
-	{
-		"onsails/lspkind.nvim",
+		"saghen/blink.cmp",
 		enabled = true,
-		lazy = false,
-		config = function()
-			require("plugins.config.completion.lspkind")
-		end,
-	},
-	{
-		"L3MON4D3/LuaSnip",
-		enabled = true,
-		lazy = true,
-		event = "InsertEnter",
-		build = "make install_jsregexp",
+		version = "1.*",
 		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
+			"saghen/blink.lib",
+			"L3MON4D3/LuaSnip",
+			"MahanRahmati/blink-nerdfont.nvim",
+			"moyiz/blink-emoji.nvim"
 		},
+		build = function()
+			require("blink.cmp").build():pwait()
+		end,
 		opts = {
-			history = true,
+			keymap = { preset = "default" },
+			completion = {
+				menu = {
+					draw = {
+						columns = {
+							{ "kind_icon" },
+							{ "label", "label_description", gap = 1 },
+							{ "source_name" },
+						},
+					},
+				},
+				documentation = {
+					auto_show = false,
+				},
+				ghost_text = { enabled = true },
+			},
+			snippets = {
+				preset = "luasnip",
+			},
+			sources = {
+				default = {
+					"lsp", "path", "buffer", "snippets",  "nerdfont", "emoji"
+				},
+				providers = {
+					lsp = { name = "LSP" },
+					buffer = { name = "Buf" },
+					path = { name = "Path" },
+					snippets = { name = "Snip" },
+					nerdfont = {
+						module = "blink-nerdfont",
+						name = "NerdFont",
+						score_offset = 15,
+						opts = { insert = true },
+					},
+					emoji = {
+						module = "blink-emoji",
+						name = "Emoji",
+						score_offset = 15,
+						opts = { insert = true },
+					},
+				},
+			},
+			fuzzy = {
+				implementation = "rust",
+				sorts = {
+					"exact",
+					"score",
+					"sort_text",
+				},
+			},
+			signature = {
+				enabled = true,
+				window = { border = "rounded" },
+			},
 		},
-		config = function()
-			require("luasnip.loaders.from_lua").lazy_load({ paths = { tostring(vim.fn.expand("$HOME/.config/nvim/snippets")) } })
-		end,
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		enabled = true,
-		lazy = false,
-		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"neovim/nvim-lspconfig",
-		},
-		config = function()
-			require("plugins.config.completion.cmp")
-		end,
-	},
-	{
-		"chrisgrieser/cmp-nerdfont",
-		enabled = true,
-		lazy = true,
-		event = "InsertEnter",
-	},
-	{
-		"allaman/emoji.nvim",
-		enabled = true,
-		lazy = true,
-		event = "InsertEnter",
-		config = function()
-			require("emoji").setup({
-				enable_cmp_integration = true,
-			})
-		end,
 	},
 }
