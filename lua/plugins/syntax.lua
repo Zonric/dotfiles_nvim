@@ -2,6 +2,7 @@ return {
 	{
 		"romus204/tree-sitter-manager.nvim",
 		enabled = true,
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			ensure_installed = {},
 			auto_install = true,

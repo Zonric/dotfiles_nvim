@@ -2,6 +2,8 @@ return {
 	{
 		"mason-org/mason.nvim",
 		enabled = true,
+		cmd = "Mason",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			-- "ray-x/lsp_signature.nvim",
@@ -36,6 +38,8 @@ return {
 	},
 	{
 		"mason-org/mason-lspconfig.nvim",
+		enabled = true,
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			ensure_installed = {
 				"bashls",

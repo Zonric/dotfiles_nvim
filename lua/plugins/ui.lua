@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-mini/mini.files",
 		enabled = true,
+		lazy = true,
 		opts = {
 			mappings = {
 				close = 'q',
@@ -19,6 +20,11 @@ return {
 				trim_right  = '>',
 			},
 		},
+	},
+	{
+		"nvim-mini/mini.pick",
+		version = "*",
+		enabled = true,
 	},
 	{
 		"akinsho/bufferline.nvim",

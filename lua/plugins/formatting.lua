@@ -2,6 +2,7 @@ return {
 	{
 		"stevearc/conform.nvim",
 		enabled = true,
+		event = { "BufWritePre" },
 		opts = {
 			formatters = {
 				prettier = {
@@ -26,6 +27,8 @@ return {
 	},
 	{
 		"mason-tool-installer.nvim",
+		enabled = true,
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"mason-org/mason.nvim",
 		},
@@ -45,6 +48,17 @@ return {
 	},
 	{
 		"nvim-mini/mini.align",
+		version = '*',
 		enabled = true,
+		lazy = true,
+		keys = {
+			{ "ga", mode = { "n", "v" }, desc = "Align" },
+			{ "gA", mode = { "n", "v" }, desc = "Align with preview" },
+		},
+		mappings = {
+			start = 'ga',
+			start_with_preview = 'gA',
+		},
+		config = function() require("mini.align").setup() end,
 	},
 }

@@ -2,6 +2,7 @@ return {
 	{
 		"saghen/blink.cmp",
 		enabled = true,
+		event = "InsertEnter",
 		version = "1.*",
 		dependencies = {
 			"saghen/blink.lib",
@@ -27,7 +28,7 @@ return {
 				documentation = {
 					auto_show = false,
 				},
-				ghost_text = { enabled = true },
+				ghost_text = { enabled = false },
 			},
 			snippets = {
 				preset = "luasnip",
