@@ -3,9 +3,6 @@ local g = vim.g
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 g.php_indent_disable = 1
-g.mapleader = " "
-g.maplocalleader = "\\"
-
 --- Dynamic Settings:
 local opt = vim.opt
 opt.encoding = "UTF-8"
@@ -66,9 +63,9 @@ opt.smartcase = true
 opt.hlsearch = true
 
 opt.undofile = true
-opt.updatetime = 2500
-opt.timeoutlen = 2500
+opt.updatetime = 300
+opt.timeoutlen = 500
 opt.inccommand = "split"
 
+vim.o.exrc = true
 vim.cmd("syntax off")
-

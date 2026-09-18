@@ -1,40 +1,46 @@
 return {
-  "mfussenegger/nvim-dap",
+	"mfussenegger/nvim-dap",
 	enabled = true,
 	lazy = true,
-  dependencies = {
-    "rcarriga/nvim-dap-ui",
-    "theHamsta/nvim-dap-virtual-text",
-    "nvim-neotest/nvim-nio",
-  },
-  config = function()
-    local dap = require("dap")
-    local dapui = require("dapui")
+	dependencies = {
+		"rcarriga/nvim-dap-ui",
+		"theHamsta/nvim-dap-virtual-text",
+		"nvim-neotest/nvim-nio",
+	},
+	config = function()
+		local dap = require("dap")
+		local dapui = require("dapui")
 
-    dapui.setup()
-    require("nvim-dap-virtual-text").setup()
+		dapui.setup()
+		require("nvim-dap-virtual-text").setup({})
 
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
-    end
+		dap.listeners.before.attach.dapui_config = function()
+			dapui.open()
+		end
 
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
+		dap.listeners.before.launch.dapui_config = function()
+			dapui.open()
+		end
 
-    -- dap.listeners.before.event_terminated.dapui_config = function()
-    --   dapui.close()
-    -- end
-    --
-    -- dap.listeners.before.event_exited.dapui_config = function()
-    --   dapui.close()
-    -- end
+		dap.listeners.before.event_terminated.dapui_config = function()
+			dapui.close()
+		end
+
+		dap.listeners.before.event_exited.dapui_config = function()
+			dapui.close()
+		end
 
 		-- C/CPP lldb configs
-		vim.fn.sign_define('DapBreakpoint', {text='🔴', texthl='DapBreakpoint', linehl='', numhl=''})
-		vim.fn.sign_define('DapStopped', {text='➡️', texthl='DapStopped', linehl='DebugLineHL', numhl=''})
-		vim.fn.sign_define('DapBreakpointCondition', {text='🔶', texthl='DapBreakpoint', linehl='', numhl=''})
-		vim.fn.sign_define('DapBreakpointRejected', {text='⚠️', texthl='DapBreakpoint', linehl='', numhl=''})
+		vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "DapStopped", linehl = "DebugLineHL", numhl = "" })
+		vim.fn.sign_define(
+			"DapBreakpointCondition",
+			{ text = "🔶", texthl = "DapBreakpoint", linehl = "", numhl = "" }
+		)
+		vim.fn.sign_define(
+			"DapBreakpointRejected",
+			{ text = "⚠️", texthl = "DapBreakpoint", linehl = "", numhl = "" }
+		)
 		dap.adapters.lldb = {
 			type = "executable",
 			command = "lldb-dap",
@@ -43,7 +49,48 @@ return {
 		dap.adapters.gdb = {
 			type = "executable",
 			command = "gdb",
-			args = { "-i", "dap" }
+			args = { "-i", "dap" },
+		}
+		dap.adapters.go = {
+			type = "server",
+			port = "${port}",
+			executable = {
+				command = "dlv",
+				args = { "dap", "-l", "127.0.0.1:${port}" },
+			},
+		}
+
+		dap.configurations.go = {
+			{
+				type = "go",
+				name = "Debug package",
+				request = "launch",
+				program = "${fileDirname}",
+				outputMode = "remote",
+			},
+			{
+				type = "go",
+				name = "Debug package (attached)",
+				mode = "remote",
+				request = "attach",
+				port = "38453",
+				host = "127.0.0.1",
+			},
+			{
+				type = "go",
+				name = "Debug file",
+				request = "launch",
+				program = "${file}",
+				outputMode = "remote",
+			},
+			{
+				type = "go",
+				name = "Debug test",
+				request = "launch",
+				mode = "test",
+				program = "${file}",
+				outputMode = "remote",
+			},
 		}
 
 		dap.configurations.cpp = {
@@ -79,6 +126,5 @@ return {
 
 		dap.configurations.c = dap.configurations.cpp
 		dap.configurations.rust = dap.configurations.cpp
-
 	end,
 }

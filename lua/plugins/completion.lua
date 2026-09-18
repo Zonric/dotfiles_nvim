@@ -2,13 +2,11 @@ return {
 	{
 		"saghen/blink.cmp",
 		enabled = true,
-		event = "InsertEnter",
-		version = "1.*",
 		dependencies = {
 			"saghen/blink.lib",
 			"L3MON4D3/LuaSnip",
-			"MahanRahmati/blink-nerdfont.nvim",
-			"moyiz/blink-emoji.nvim"
+			"zonric/blink-nerdfont.nvim",
+			"zonric/blink-emoji.nvim",
 		},
 		build = function()
 			require("blink.cmp").build():pwait()
@@ -35,7 +33,12 @@ return {
 			},
 			sources = {
 				default = {
-					"lsp", "path", "buffer", "snippets",  "nerdfont", "emoji"
+					"lsp",
+					"path",
+					"buffer",
+					"snippets",
+					"nerdfont",
+					"emoji",
 				},
 				providers = {
 					lsp = { name = "LSP" },
@@ -46,13 +49,13 @@ return {
 						module = "blink-nerdfont",
 						name = "NerdFont",
 						score_offset = 15,
-						opts = { insert = true },
+						opts = { insert = true, trigger = ":!" },
 					},
 					emoji = {
 						module = "blink-emoji",
 						name = "Emoji",
 						score_offset = 15,
-						opts = { insert = true },
+						opts = { insert = true, trigger = ":@" },
 					},
 				},
 			},

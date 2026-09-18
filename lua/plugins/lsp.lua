@@ -18,8 +18,8 @@ return {
 						return
 					end
 
-					local allowed = { lua_ls = true }
-					if not allowed[client.name] then
+					local disallowed = {}
+					if disallowed[client.name] then
 						client.server_capabilities.documentFormattingProvider = false
 						client.server_capabilities.documentRangeFormattingProvider = false
 					end
@@ -55,6 +55,17 @@ return {
 				"gopls",
 			},
 			automatic_enable = true,
+		},
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
 		},
 	},
 }

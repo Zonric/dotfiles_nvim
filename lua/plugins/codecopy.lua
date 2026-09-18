@@ -1,12 +1,35 @@
 return {
 	{
-		"https://gitlab.com/nullsyntax/codecopy.nvim.git",
+		"Zonric/codecopy.nvim",
 		enabled = true,
-		lazy = true,
-		event = { "BufReadPost", "BufNewFile" },
 		dependencies = { "MunifTanjim/nui.nvim" },
 		opts = {
 			keymap = "<leader>cc",
-		}
-	}
+			env = {
+				enabled = true,
+			},
+		},
+	},
+	{
+		"zonric/codecopy.nvim",
+		name = "codecopy-dev-remote",
+		branch = "dev",
+		enabled = false,
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {
+			keymap = "<leader>cc",
+		},
+	},
+	{
+		dir = "~/dev/nvim/codecopy.nvim",
+		name = "codecopy-dev-local",
+		enabled = false,
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {
+			keymap = "<leader>cc",
+			messages = {
+				debug = true,
+			},
+		},
+	},
 }

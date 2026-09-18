@@ -1,30 +1,61 @@
 return {
 	{
+		"nvim-tree/nvim-tree.lua",
+		enabled = true,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {
+			view = { width = 30 },
+			filters = { dotfiles = true },
+		},
+	},
+	{
 		"nvim-mini/mini.files",
 		enabled = true,
 		lazy = true,
 		opts = {
 			mappings = {
-				close = 'q',
-				go_in = 'l',
-				go_in_plus  = '<CR>',
-				go_out      = 'h',
-				go_out_plus = '<BS>',
-				mark_goto   = "'",
-				mark_set    = 'm',
-				reset       = 'R',
-				reveal_cwd  = '@',
-				show_help   = 'g?',
-				synchronize = '=',
-				trim_left   = '<',
-				trim_right  = '>',
+				close = "q",
+				go_in = "l",
+				go_in_plus = "<CR>",
+				go_out = "h",
+				go_out_plus = "<BS>",
+				mark_goto = "'",
+				mark_set = "m",
+				reset = "R",
+				reveal_cwd = "@",
+				show_help = "g?",
+				synchronize = "=",
+				trim_left = "<",
+				trim_right = ">",
 			},
 		},
+	},
+	{
+		"rcarriga/nvim-notify",
+		enabled = true,
+		config = function()
+			vim.notify = require("notify")
+		end,
 	},
 	{
 		"nvim-mini/mini.pick",
 		version = "*",
 		enabled = true,
+	},
+	{
+		"nvim-mini/mini.indentscope",
+		version = false,
+		enabled = true,
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			symbol = "│",
+			options = { try_as_border = true },
+			draw = {
+				delay = 50,
+			},
+		},
 	},
 	{
 		"akinsho/bufferline.nvim",
@@ -58,7 +89,24 @@ return {
 				},
 				lualine_x = { "searchcount", "filesize" },
 				lualine_y = { "location", "filetype" },
-				lualine_z = { "lsp_status" },
+				lualine_z = {
+					"lsp_status",
+					{
+						function()
+							local ok, conform = pcall(require, "conform")
+							if not ok then
+								return ""
+							end
+							local formatters = conform.list_formatters(0)
+							local names = {}
+							for _, formatter in ipairs(formatters) do
+								table.insert(names, formatter.name)
+							end
+							return #names > 0 and table.concat(names, ", ") or ""
+						end,
+						icon = "",
+					},
+				},
 			},
 			inactive_sections = {
 				lualine_a = {},

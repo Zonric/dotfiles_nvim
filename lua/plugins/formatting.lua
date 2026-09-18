@@ -2,31 +2,44 @@ return {
 	{
 		"stevearc/conform.nvim",
 		enabled = true,
-		event = { "BufWritePre" },
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			formatters = {
+				goimports = {
+					command = "goimports",
+				},
 				prettier = {
 					command = "/usr/bin/prettier",
 				},
 				shfmt = {
 					args = { "-i", "0", "-ci", "-ln", "bash" },
 				},
+				["clang-format"] = {
+					command = "clang-format",
+					args = { "-style=file" },
+				},
 			},
 			formatters_by_ft = {
 				blade = { "blade-formatter" },
+				cpp = { "clang-format" },
+				go = { "goimports" },
+				json = { "biome", "prettierd", "prettier", stop_after_first = true },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
+				python = { "isort", "black" },
 				sh = { "shfmt" },
 				toml = { "tombi" },
 				twig = { "twig-cs-fixer" },
-				yaml = { "yamlfix" },
 				zsh = { "beautysh" },
-				python = { "isort", "black" },
-			}
+			},
+			format_on_save = {
+				timeout_ms = 500,
+				lsp_fallback = true,
+			},
 		},
 	},
 	{
-		"mason-tool-installer.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		enabled = true,
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
@@ -34,21 +47,21 @@ return {
 		},
 		opts = {
 			ensure_installed = {
+				"goimports",
 				"shfmt",
 				"blade-formatter",
 				"php-cs-fixer",
-				"stylua",
 				"tombi",
 				"twig-cs-fixer",
-				"yamlfix",
 				"beautysh",
-				"isort", "black",
+				"isort",
+				"black",
 			},
 		},
 	},
 	{
 		"nvim-mini/mini.align",
-		version = '*',
+		version = "*",
 		enabled = true,
 		lazy = true,
 		keys = {
@@ -56,9 +69,11 @@ return {
 			{ "gA", mode = { "n", "v" }, desc = "Align with preview" },
 		},
 		mappings = {
-			start = 'ga',
-			start_with_preview = 'gA',
+			start = "ga",
+			start_with_preview = "gA",
 		},
-		config = function() require("mini.align").setup() end,
+		config = function()
+			require("mini.align").setup()
+		end,
 	},
 }
