@@ -48,6 +48,7 @@ opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
 opt.termguicolors = true
+opt.winborder = "rounded"
 opt.laststatus = 3
 --opt.colorcolumn = "100"
 opt.showmode = false

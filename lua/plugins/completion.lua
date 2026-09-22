@@ -4,7 +4,13 @@ return {
 		enabled = true,
 		dependencies = {
 			"saghen/blink.lib",
-			"L3MON4D3/LuaSnip",
+			{
+				"L3MON4D3/LuaSnip",
+				config = function()
+					require("luasnip").filetype_extend("cpp", { "c" })
+					require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
+				end,
+			},
 			"zonric/blink-nerdfont.nvim",
 			"zonric/blink-emoji.nvim",
 		},
