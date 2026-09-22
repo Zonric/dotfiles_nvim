@@ -13,6 +13,7 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
   - Inlay hints toggleable via native Neovim 0.12 API (`<leader>ch`).
   - Formatted with `prettierd` (fallback to `prettier`) through `conform.nvim`.
   - JSX auto-tagging and renaming via `nvim-ts-autotag`.
+  - Context-aware JSX comments via `nvim-ts-context-commentstring`.
   - Color previews for Tailwind CSS via `nvim-highlight-colors`.
   - Custom React snippets (`rfc`, `us`, `ue`, `um`, `uc`, `ur`).
 - **Unified Fuzzy Finding**: `fzf-lua` powers all file, grep, git, and LSP pickers, as well as the startup dashboard.
@@ -120,13 +121,30 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 | `<leader>dq` | `dap.terminate()` | Terminate debug session |
 | `<leader>du` | `dapui.toggle()` | Toggle DAP UI |
 
-### Navigation & Buffers
+### Git & Hunks (`<leader>g*`)
+
+| Keymap | Action | Description |
+|---|---|---|
+| `<leader>gl` | `:LazyGit` | Open floating LazyGit |
+| `<leader>gp` | `gitsigns.preview_hunk()` | Preview hunk inline |
+| `<leader>ghs` | `gitsigns.stage_hunk()` | Stage hunk (normal/visual) |
+| `<leader>ghr` | `gitsigns.reset_hunk()` | Reset hunk (normal/visual) |
+| `<leader>ghu` | `gitsigns.undo_stage_hunk()`| Undo last stage hunk |
+| `<leader>gb` | `fzf-lua.git_branches()` | Switch / inspect git branches |
+| `<leader>gB` | `fzf-lua.git_blame()` | Git blame picker |
+| `<leader>gc` | `fzf-lua.git_commits()` | View git commit logs |
+| `<leader>gd` | `fzf-lua.git_diff()` | View git diff picker |
+| `<leader>gs` | `fzf-lua.git_status()` | Git status picker |
+
+### Navigation & Diagnostics
 
 | Keymap | Action | Description |
 |---|---|---|
 | `<S-h>` / `<S-l>` | BufferLineCycle | Previous / next buffer tab |
 | `<C-S-h>` / `<C-S-l>` | BufferLineMove | Move buffer tab left / right |
 | `<leader>bd` | `bp\|bd#` | Close current buffer |
+| `]d` / `[d` | `vim.diagnostic` | Next / previous diagnostic |
+| `]h` / `[h` | `gitsigns` | Next / previous git hunk |
 | `]t` / `[t` | `todo-comments` | Next / previous TODO comment |
 | `<C-h/j/k/l>` | Window movement | Move focus between split windows |
 | `<C-A-h/j/k/l>` | Window resize | Incrementally resize splits |
