@@ -8,20 +8,20 @@ return {
 			local statusLine = "Loading..."
 
 			local function pick_files()
-				local ok, pick = pcall(require, "mini.pick")
+				local ok, fzf = pcall(require, "fzf-lua")
 				if ok then
-					pick.builtin.files()
+					fzf.files()
 				else
-					vim.notify("mini.pick is not installed", vim.log.levels.WARN)
+					vim.notify("fzf-lua is not installed", vim.log.levels.WARN)
 				end
 			end
 
 			local function pick_grep()
-				local ok, pick = pcall(require, "mini.pick")
+				local ok, fzf = pcall(require, "fzf-lua")
 				if ok then
-					pick.builtin.grep_live()
+					fzf.live_grep()
 				else
-					vim.notify("mini.pick is not installed", vim.log.levels.WARN)
+					vim.notify("fzf-lua is not installed", vim.log.levels.WARN)
 				end
 			end
 

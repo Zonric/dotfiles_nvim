@@ -40,11 +40,6 @@ return {
 		end,
 	},
 	{
-		"nvim-mini/mini.pick",
-		version = "*",
-		enabled = true,
-	},
-	{
 		"nvim-mini/mini.indentscope",
 		version = false,
 		enabled = true,
