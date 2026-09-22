@@ -4,7 +4,11 @@ return {
 		enabled = true,
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
-			ensure_installed = {},
+			ensure_installed = {
+				"javascript",
+				"tsx",
+				"typescript",
+			},
 			auto_install = true,
 			noauto_install = {},
 			nohighlight = {},
