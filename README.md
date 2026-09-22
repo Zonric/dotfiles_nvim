@@ -190,18 +190,68 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 
 ## Installation & Requirements
 
-### Requirements
+### System Requirements
+
+#### Common Dependencies (All Profiles)
 - **Neovim**: `v0.12.0` or newer
-- **Git**, **curl**, and a **C compiler** (`gcc` or `clang`) for Treesitter parsers
-- **ripgrep** (`rg`) and **fd** for fast fuzzy finding
-- **Node.js** and **npm** (for language servers and formatters)
+- **tree-sitter CLI**: Required by `tree-sitter-manager.nvim` to build/compile parsers
+- **Build tools**: `git`, `curl`, `tar`, and a C/C++ compiler (`gcc`/`g++` or `clang` + `make`)
+- **Fuzzy finding**: `ripgrep` (`rg`), `fd` (or `fd-find`), and `fzf`
+- **Runtime**: `Node.js` and `npm` (for Mason language servers and formatters)
+
+#### Profile: Server / VPS (Minimal External Tooling)
+Only installs what is required for file editing, LSP syntax checking, code sharing, and tree-sitter parsers:
+
+- **Debian / Ubuntu**:
+  ```bash
+  sudo apt update && sudo apt install -y \
+    git curl gcc g++ make ripgrep fd-find fzf nodejs npm tree-sitter-cli
+
+  # Ensure 'fd' is available on PATH if Debian installs it as 'fdfind':
+  mkdir -p ~/.local/bin && ln -sf $(which fdfind) ~/.local/bin/fd
+  ```
+- **Arch Linux**:
+  ```bash
+  sudo pacman -S --needed \
+    git curl gcc make ripgrep fd fzf nodejs npm tree-sitter-cli
+  ```
+- **Fedora / RHEL**:
+  ```bash
+  sudo dnf install -y \
+    git curl gcc gcc-c++ make ripgrep fd-find fzf nodejs npm tree-sitter-cli
+  ```
+
+#### Profile: Full Workstation (Includes Debuggers & Compilers)
+In addition to the server tools, includes native debugging tools for `nvim-dap` (`gdb`, `lldb`, `delve` for Go):
+
+- **Debian / Ubuntu**:
+  ```bash
+  sudo apt update && sudo apt install -y \
+    git curl gcc g++ clang make ripgrep fd-find fzf nodejs npm tree-sitter-cli \
+    gdb lldb golang-go python3-pip python3-venv
+
+  mkdir -p ~/.local/bin && ln -sf $(which fdfind) ~/.local/bin/fd
+  ```
+- **Arch Linux**:
+  ```bash
+  sudo pacman -S --needed \
+    git curl gcc clang make ripgrep fd fzf nodejs npm tree-sitter-cli \
+    gdb lldb go delve python
+  ```
+- **Fedora / RHEL**:
+  ```bash
+  sudo dnf install -y \
+    git curl gcc gcc-c++ clang make ripgrep fd-find fzf nodejs npm tree-sitter-cli \
+    gdb lldb golang delve python3 python3-pip
+  ```
 
 ### Quick Setup
 ```bash
 git clone https://github.com/Zonric/dotfiles_nvim.git ~/.config/nvim
 nvim
 ```
-Plugins, language servers, formatters, and debug adapters will install automatically on first launch via Lazy and Mason Tool Installer.
+Plugins, language servers, and formatters will install automatically on first launch via Lazy and Mason Tool Installer.
+
 
 ### Server / VPS Profile
 For low-resource remote servers and VPS instances where you only need fast fixes, editing, and code sharing without heavy local debuggers, test runners, or database managers:
