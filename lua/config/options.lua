@@ -1,4 +1,4 @@
---- Global Setttings:
+--- Global Settings:
 local g = vim.g
 g.mapleader = " "
 g.maplocalleader = "\\"

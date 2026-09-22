@@ -7,7 +7,7 @@ return {
 		},
 		opts = {
 			view = { width = 30 },
-			filters = { dotfiles = true },
+			filters = { dotfiles = false },
 		},
 	},
 	{
