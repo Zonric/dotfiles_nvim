@@ -141,7 +141,7 @@ vim.keymap.set("n", "<leader>ch", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 end, { desc = "Toggle Inlay Hints." })
 
-wk_add_group("<leader>d", "Debug...")
+wk_add_group("<leader>d", "Debug / Data...")
 vim.keymap.set("n", "<leader>db", function()
 	require("dap").toggle_breakpoint()
 end, { desc = "Set Breakpoint." })
@@ -169,6 +169,12 @@ end, { desc = "Open Repl" })
 vim.keymap.set("n", "<leader>du", function()
 	require("dapui").toggle()
 end, { desc = "Toggle DAP UI" })
+
+wk_add_group("<leader>dd", "Database...")
+vim.keymap.set("n", "<leader>ddu", "<CMD>DBUIToggle<CR>", { desc = "Toggle DB UI." })
+vim.keymap.set("n", "<leader>ddf", "<CMD>DBUIFindBuffer<CR>", { desc = "Find DB buffer." })
+vim.keymap.set("n", "<leader>ddr", "<CMD>DBUIRenameBuffer<CR>", { desc = "Rename DB buffer." })
+vim.keymap.set("n", "<leader>ddl", "<CMD>DBUILastQueryInfo<CR>", { desc = "Last query info." })
 
 vim.keymap.set("n", "<leader>e", function()
 	if not require("mini.files").close() then

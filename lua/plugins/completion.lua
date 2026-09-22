@@ -49,11 +49,21 @@ return {
 					"nerdfont",
 					"emoji",
 				},
+				per_filetype = {
+					sql = { "dadbod", "snippets", "buffer" },
+					mysql = { "dadbod", "snippets", "buffer" },
+					plsql = { "dadbod", "snippets", "buffer" },
+				},
 				providers = {
 					lsp = { name = "LSP" },
 					buffer = { name = "Buf" },
 					path = { name = "Path" },
 					snippets = { name = "Snip" },
+					dadbod = {
+						name = "Dadbod",
+						module = "vim_dadbod_completion.blink",
+						score_offset = 85,
+					},
 					nerdfont = {
 						module = "blink-nerdfont",
 						name = "NerdFont",
