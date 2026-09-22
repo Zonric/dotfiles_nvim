@@ -15,9 +15,20 @@ local function ns_suffix(args)
 end
 
 local function guard_name()
-	local name = vim.fn.expand("%:t:r"):upper():gsub("[^%w]", "_")
+	local full_path = vim.fn.expand("%:p")
+	local relative = full_path:match(".*/include/(.+)%..+$")
+
+	if not relative then
+		relative = vim.fn.expand("%:.:r")
+	end
+
+	local clean = relative:gsub("[/\\]", "_"):gsub("[^%w_]", "_"):upper()
 	local ext = vim.fn.expand("%:e"):upper():gsub("[^%w]", "_")
-	return name .. "_" .. ext
+	if ext == "" then
+		ext = "H"
+	end
+
+	return clean .. "_" .. ext
 end
 
 return {
