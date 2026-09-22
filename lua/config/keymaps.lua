@@ -128,6 +128,7 @@ vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 end, { desc = "Format buffer/selection." })
 vim.keymap.set("n", "<leader>cu", "<CMD>CodeCopy open ui<CR>", { desc = "Open CC UI." })
 vim.keymap.set("n", "<leader>ce", vim.diagnostic.open_float, { desc = "diagnostics." })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename symbol." })
 
 wk_add_group("<leader>d", "Debug...")
 vim.keymap.set("n", "<leader>db", function()
