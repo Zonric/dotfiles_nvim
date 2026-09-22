@@ -32,6 +32,8 @@ vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementa
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Display LSP hover info." })
 
 -- Square bracket keys
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
 vim.keymap.set("n", "]t", function()
 	require("todo-comments").jump_next()
 end, { desc = "Next todo comment" })
