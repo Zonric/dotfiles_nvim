@@ -55,7 +55,7 @@ return {
 	},
 	{
 		"vuki656/package-info.nvim",
-		enabled = true,
+		enabled = not vim.g.is_server,
 		event = { "BufRead package.json" },
 		dependencies = { "MunifTanjim/nui.nvim" },
 		opts = {},

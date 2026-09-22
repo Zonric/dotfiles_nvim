@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-neotest/neotest",
-		enabled = true,
+		enabled = not vim.g.is_server,
 		lazy = true,
 		cmd = { "Neotest" },
 		dependencies = {

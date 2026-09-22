@@ -1,7 +1,7 @@
 return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		enabled = true,
+		enabled = not vim.g.is_server,
 		lazy = true,
 		ft = { "markdown" },
 		cmd = "RenderMarkdown",

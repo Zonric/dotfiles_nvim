@@ -1,7 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		enabled = true,
+		enabled = not vim.g.is_server,
 		lazy = true,
 		dependencies = {
 			"rcarriga/nvim-dap-ui",

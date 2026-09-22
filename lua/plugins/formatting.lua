@@ -54,8 +54,8 @@ return {
 		dependencies = {
 			"mason-org/mason.nvim",
 		},
-		opts = {
-			ensure_installed = {
+		opts = function()
+			local tools = {
 				"goimports",
 				"shfmt",
 				"blade-formatter",
@@ -66,9 +66,12 @@ return {
 				"isort",
 				"black",
 				"prettierd",
-				"js-debug-adapter",
-			},
-		},
+			}
+			if not vim.g.is_server then
+				table.insert(tools, "js-debug-adapter")
+			end
+			return { ensure_installed = tools }
+		end,
 	},
 	{
 		"nvim-mini/mini.align",

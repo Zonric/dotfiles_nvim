@@ -5,6 +5,12 @@ g.maplocalleader = "\\"
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 g.php_indent_disable = 1
+
+-- Server profile detection:
+-- Enable via NVIM_SERVER=1 or creating ~/.config/nvim/.server
+g.is_server = vim.env.NVIM_SERVER == "1"
+	or vim.fn.filereadable(vim.fn.stdpath("config") .. "/.server") == 1
+
 --- Dynamic Settings:
 local opt = vim.opt
 opt.encoding = "UTF-8"

@@ -1,7 +1,7 @@
 return {
 	{
 		"kawre/leetcode.nvim",
-		enabled = true,
+		enabled = not vim.g.is_server,
 		cmd = "Leet",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

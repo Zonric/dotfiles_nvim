@@ -202,3 +202,20 @@ git clone https://github.com/Zonric/dotfiles_nvim.git ~/.config/nvim
 nvim
 ```
 Plugins, language servers, formatters, and debug adapters will install automatically on first launch via Lazy and Mason Tool Installer.
+
+### Server / VPS Profile
+For low-resource remote servers and VPS instances where you only need fast fixes, editing, and code sharing without heavy local debuggers, test runners, or database managers:
+
+Set the environment variable or create the marker file:
+```bash
+# Option A: Environment variable in ~/.bashrc or ~/.zshrc
+export NVIM_SERVER=1
+
+# Option B: Per-installation marker file
+touch ~/.config/nvim/.server
+```
+When active:
+- Disables `nvim-dap`, `vim-dadbod`, `leetcode.nvim`, `neotest`, `render-markdown`, and `package-info.nvim`.
+- Excludes heavy debug adapters (`js-debug-adapter`) from automated Mason downloads.
+- Hides unused debug and test keymap groups from WhichKey.
+- Keeps full editing power, LSP, formatting, file explorers (`nvim-tree` + `mini.files`), fuzzy finding, and `codecopy.nvim` intact.

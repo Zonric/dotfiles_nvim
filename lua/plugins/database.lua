@@ -1,6 +1,7 @@
 return {
 	{
 		"tpope/vim-dadbod",
+		enabled = not vim.g.is_server,
 		lazy = true,
 		cmd = { "DB", "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
 		dependencies = {
