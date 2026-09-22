@@ -46,8 +46,9 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
         ├── completion.lua     # Blink.cmp & LuaSnip configuration
         ├── dap.lua            # DAP adapters & language debug configs
         ├── dashboard.lua      # Mini.starter dashboard with fzf-lua
+        ├── database.lua       # Vim-dadbod and dadbod-ui
         ├── diagnostics.lua    # Trouble.nvim diagnostics list
-        ├── editing.lua        # Surround, autopairs, autotag
+        ├── editing.lua        # Surround, autopairs, autotag, package-info
         ├── formatting.lua     # Conform.nvim & Mason tool installer
         ├── git.lua            # Gitsigns, LazyGit, DiffConflicts
         ├── informational.lua  # Todo-comments, nvim-highlight-colors
@@ -56,6 +57,7 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
         ├── picker.lua         # Fzf-lua UI select registration
         ├── rendering.lua      # Render-markdown
         ├── syntax.lua         # Tree-sitter-manager
+        ├── testing.lua        # Neotest test runner
         ├── themes.lua         # Nightfox (Carbonfox)
         └── ui.lua             # Lualine, Bufferline, NvimTree, Mini.files
 ```
@@ -108,7 +110,7 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 | `<leader>gl` | `:LazyGit` | Open floating LazyGit |
 | `<C-/>` | Terminal toggle | Open/focus bottom split terminal |
 
-### Debugging (`<leader>d*`)
+### Debug & Database (`<leader>d*`)
 
 | Keymap | Action | Description |
 |---|---|---|
@@ -120,6 +122,31 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 | `<F11>` / `<leader>do`| `dap.step_out()` | Step out |
 | `<leader>dq` | `dap.terminate()` | Terminate debug session |
 | `<leader>du` | `dapui.toggle()` | Toggle DAP UI |
+| `<leader>dr` | `dapui.open()` | Open REPL |
+| `<leader>ddu`| `:DBUIToggle` | Toggle database drawer |
+| `<leader>ddf`| `:DBUIFindBuffer` | Find database query buffer |
+| `<leader>ddr`| `:DBUIRenameBuffer` | Rename query buffer |
+| `<leader>ddl`| `:DBUILastQueryInfo` | Show last query info |
+
+### Testing (`<leader>t*`)
+
+| Keymap | Action | Description |
+|---|---|---|
+| `<leader>tr` | `neotest.run.run()` | Run nearest test |
+| `<leader>tf` | `neotest.run.run(file)` | Run all tests in file |
+| `<leader>ts` | `neotest.summary.toggle()` | Toggle test summary tree |
+| `<leader>to` | `neotest.output.open()` | Open test output panel |
+| `<leader>tS` | `neotest.run.stop()` | Stop running test |
+
+### NPM Packages (`<leader>p*`)
+
+| Keymap | Action | Description |
+|---|---|---|
+| `<leader>pt` | `package-info.toggle()` | Toggle dependency version hints |
+| `<leader>pu` | `package-info.update()` | Update package to latest version |
+| `<leader>pd` | `package-info.delete()` | Delete package from dependencies |
+| `<leader>pi` | `package-info.install()` | Install a new package |
+| `<leader>pc` | `package-info.change_version()` | Change package version |
 
 ### Git & Hunks (`<leader>g*`)
 
