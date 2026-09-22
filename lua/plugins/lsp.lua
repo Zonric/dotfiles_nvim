@@ -18,7 +18,9 @@ return {
 						return
 					end
 
-					local disallowed = {}
+					local disallowed = {
+						ts_ls = true,
+					}
 					if disallowed[client.name] then
 						client.server_capabilities.documentFormattingProvider = false
 						client.server_capabilities.documentRangeFormattingProvider = false
@@ -45,14 +47,17 @@ return {
 				"bashls",
 				"clangd",
 				"cssls",
+				"eslint",
+				"gopls",
 				"html",
 				"intelephense",
 				"laravel_ls",
 				"lua_ls",
 				"phpactor",
 				"pyright",
+				"tailwindcss",
+				"ts_ls",
 				"twiggy_language_server",
-				"gopls",
 			},
 			automatic_enable = true,
 		},
