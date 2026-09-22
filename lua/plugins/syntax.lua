@@ -6,6 +6,8 @@ return {
 		opts = {
 			ensure_installed = {
 				"javascript",
+				"markdown",
+				"markdown_inline",
 				"tsx",
 				"typescript",
 			},

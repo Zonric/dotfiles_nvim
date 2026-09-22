@@ -27,3 +27,16 @@ vim.api.nvim_create_autocmd("User", {
 	end,
 })
 
+-- Gracefully handle markdown if treesitter parser is not installed yet
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function(args)
+		local ok = pcall(vim.treesitter.language.inspect, "markdown")
+		if not ok then
+			pcall(vim.treesitter.stop, args.buf)
+			vim.bo[args.buf].syntax = "markdown"
+		end
+	end,
+})
+
+
