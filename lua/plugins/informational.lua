@@ -15,4 +15,13 @@ return {
 			enable_tailwind = true,
 		},
 	},
+	{
+		"nvim-mini/mini.cursorword",
+		version = false,
+		enabled = true,
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {
+			delay = 100,
+		},
+	},
 }
