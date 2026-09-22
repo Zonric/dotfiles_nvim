@@ -5,4 +5,14 @@ return {
 		enabled = true,
 		opts = {},
 	},
+	{
+		"brenoprata10/nvim-highlight-colors",
+		enabled = true,
+		event = "BufReadPre",
+		opts = {
+			render = "background",
+			enable_named_colors = true,
+			enable_tailwind = true,
+		},
+	},
 }
