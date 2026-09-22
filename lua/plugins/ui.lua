@@ -61,57 +61,70 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		enabled = true,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			options = {
-				disabled_filetypes = {
-					statusline = { "dashboard", "alpha", "NvimTree" },
-					winbar = {},
-				},
-				globalstatus = true,
-			},
-			sections = {
-				lualine_a = { "mode" },
-				lualine_b = { "branch", "diff", "diagnostics" },
-				lualine_c = {
-					{
-						function()
-							return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
-						end,
-						icon = "󰉋",
+		opts = function()
+			local lualine_a = {}
+			if vim.g.is_server then
+				table.insert(lualine_a, {
+					function()
+						local uv = vim.uv or vim.loop
+						return uv.os_gethostname()
+					end,
+					icon = "󰒋",
+				})
+			end
+			table.insert(lualine_a, "mode")
+
+			return {
+				options = {
+					disabled_filetypes = {
+						statusline = { "dashboard", "alpha", "NvimTree" },
+						winbar = {},
 					},
-					{ "filename", path = 1 },
+					globalstatus = true,
 				},
-				lualine_x = { "searchcount", "filesize" },
-				lualine_y = { "location", "filetype" },
-				lualine_z = {
-					"lsp_status",
-					{
-						function()
-							local ok, conform = pcall(require, "conform")
-							if not ok then
-								return ""
-							end
-							local formatters = conform.list_formatters(0)
-							local names = {}
-							for _, formatter in ipairs(formatters) do
-								table.insert(names, formatter.name)
-							end
-							return #names > 0 and table.concat(names, ", ") or ""
-						end,
-						icon = "",
+				sections = {
+					lualine_a = lualine_a,
+					lualine_b = { "branch", "diff", "diagnostics" },
+					lualine_c = {
+						{
+							function()
+								return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+							end,
+							icon = "󰉋",
+						},
+						{ "filename", path = 1 },
+					},
+					lualine_x = { "searchcount", "filesize" },
+					lualine_y = { "location", "filetype" },
+					lualine_z = {
+						"lsp_status",
+						{
+							function()
+								local ok, conform = pcall(require, "conform")
+								if not ok then
+									return ""
+								end
+								local formatters = conform.list_formatters(0)
+								local names = {}
+								for _, formatter in ipairs(formatters) do
+									table.insert(names, formatter.name)
+								end
+								return #names > 0 and table.concat(names, ", ") or ""
+							end,
+							icon = "",
+						},
 					},
 				},
-			},
-			inactive_sections = {
-				lualine_a = {},
-				lualine_b = {},
-				lualine_c = { "filename" },
-				lualine_x = { "location" },
-				lualine_y = {},
-				lualine_z = {},
-			},
-		},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = { "filename" },
+					lualine_x = { "location" },
+					lualine_y = {},
+					lualine_z = {},
+				},
+			}
+		end,
 	},
 	{
 		"folke/which-key.nvim",
