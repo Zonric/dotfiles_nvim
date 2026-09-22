@@ -61,6 +61,7 @@ return {
 				"isort",
 				"black",
 				"prettierd",
+				"js-debug-adapter",
 			},
 		},
 	},

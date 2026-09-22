@@ -60,6 +60,15 @@ return {
 				args = { "dap", "-l", "127.0.0.1:${port}" },
 			},
 		}
+		dap.adapters["pwa-node"] = {
+			type = "server",
+			host = "localhost",
+			port = "${port}",
+			executable = {
+				command = "js-debug-adapter",
+				args = { "${port}" },
+			},
+		}
 
 		dap.configurations.go = {
 			{
@@ -127,6 +136,26 @@ return {
 
 		dap.configurations.c = dap.configurations.cpp
 		dap.configurations.rust = dap.configurations.cpp
+
+		local js_languages = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+		for _, language in ipairs(js_languages) do
+			dap.configurations[language] = {
+				{
+					type = "pwa-node",
+					request = "launch",
+					name = "Launch file (Node)",
+					program = "${file}",
+					cwd = "${workspaceFolder}",
+				},
+				{
+					type = "pwa-node",
+					request = "attach",
+					name = "Attach to process",
+					processId = require("dap.utils").pick_process,
+					cwd = "${workspaceFolder}",
+				},
+			}
+		end
 	end,
 	},
 }
