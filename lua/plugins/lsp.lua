@@ -37,8 +37,7 @@ return {
 				},
 			})
 
-			local lspconfig = require("lspconfig")
-			lspconfig.ts_ls.setup({
+			vim.lsp.config("ts_ls", {
 				settings = {
 					typescript = {
 						inlayHints = {
