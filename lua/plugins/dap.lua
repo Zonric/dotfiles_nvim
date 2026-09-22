@@ -1,14 +1,15 @@
 return {
-	"mfussenegger/nvim-dap",
-	enabled = true,
-	lazy = true,
-	dependencies = {
-		"rcarriga/nvim-dap-ui",
-		"theHamsta/nvim-dap-virtual-text",
-		"nvim-neotest/nvim-nio",
-	},
-	config = function()
-		local dap = require("dap")
+	{
+		"mfussenegger/nvim-dap",
+		enabled = true,
+		lazy = true,
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-neotest/nvim-nio",
+		},
+		config = function()
+			local dap = require("dap")
 		local dapui = require("dapui")
 
 		dapui.setup()
@@ -127,4 +128,5 @@ return {
 		dap.configurations.c = dap.configurations.cpp
 		dap.configurations.rust = dap.configurations.cpp
 	end,
+	},
 }
