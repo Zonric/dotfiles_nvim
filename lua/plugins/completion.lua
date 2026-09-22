@@ -7,7 +7,10 @@ return {
 			{
 				"L3MON4D3/LuaSnip",
 				config = function()
-					require("luasnip").filetype_extend("cpp", { "c" })
+					local luasnip = require("luasnip")
+					luasnip.filetype_extend("cpp", { "c" })
+					luasnip.filetype_extend("typescriptreact", { "typescript", "javascriptreact", "javascript" })
+					luasnip.filetype_extend("javascriptreact", { "javascript" })
 					require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })
 				end,
 			},
