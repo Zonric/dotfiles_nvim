@@ -39,7 +39,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
 -- Auto close nvim-tree if it is the last remaining window
 vim.api.nvim_create_autocmd("QuitPre", {
 	callback = function()
@@ -58,4 +57,13 @@ vim.api.nvim_create_autocmd("QuitPre", {
 		end
 	end,
 })
+
+-- Enable Treesitter indentation for templ and html files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "templ", "html" },
+	callback = function(args)
+		vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
+})
+
 
