@@ -16,9 +16,18 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
   - Context-aware JSX comments via `nvim-ts-context-commentstring`.
   - Color previews for Tailwind CSS via `nvim-highlight-colors`.
   - Custom React snippets (`rfc`, `us`, `ue`, `um`, `uc`, `ur`).
+- **Comprehensive Go & Templ Support**:
+  - Go tooling: `gopls` configured with full semantic tokens, staticcheck, deep analysis, unimported completions, and comprehensive inlay hints.
+  - Formatting with `goimports` and `templ fmt` via `conform.nvim`.
+  - Templ integration: `templ` language server via Mason, `html` and `tailwindcss` LSPs attached to `.templ` files, `nvim-ts-autotag` tag pairing, `nvim-autopairs` tag newline expansion on `<CR>`, and `luasnip` HTML snippet inheritance.
+  - Dedicated Treesitter indentation queries (`queries/templ/indents.scm`) seamlessly indenting HTML structures and Templ control flow.
+  - Treesitter indentation wired for both `html` and `templ` files, ensuring both block (`<div>`) and non-block/inline (`<p>`, `<span>`, `<a>`) tags properly indent inward on Enter.
 - **Unified Fuzzy Finding**: `fzf-lua` powers all file, grep, git, and LSP pickers, as well as the startup dashboard.
 - **Multi-Language Debugging**: `nvim-dap` configured for C/C++ (`lldb-dap`, `gdb`), Go (`delve`), and Node/TypeScript (`js-debug-adapter`).
-- **File Management**: Both `nvim-tree` (drawer) and `mini.files` (fast in-buffer navigation).
+- **Testing**: `neotest` suite runner with adapters for Go (`neotest-golang`), TypeScript/JavaScript (`neotest-vitest`, `neotest-jest`), and Python (`neotest-python`).
+- **File Management & Sessions**:
+  - Both `nvim-tree` (with auto-close on last buffer) and `mini.files` (fast in-buffer navigation).
+  - Project session manager (`<leader>q*`) with automatic dirty buffer snapshots to prevent unwritten work loss across restarts.
 
 ---
 
@@ -30,13 +39,15 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 ├── lazy-lock.json             # Pinned plugin lockfile
 ├── docs/                      # Implementation plans and design specs
 │   └── plans/
+├── queries/                   # Tree-sitter query overrides and custom extensions
+│   └── templ/                 # Custom HTML/Go indentation query (indents.scm)
 ├── snippets/                  # Custom LuaSnip snippet definitions
 │   ├── c.lua                  # Namespaced include guards, printf, loops
 │   ├── typescript.lua         # Arrow functions, interfaces, types
 │   └── typescriptreact.lua    # RFC component template, hooks
 └── lua/
     ├── config/                # Core Neovim configuration
-    │   ├── autocmd.lua        # Auto-commands (highlight yank, help layout)
+    │   ├── autocmd.lua        # Auto-commands (yank highlight, tree auto-close, html/templ indent)
     │   ├── diagnostics.lua    # Diagnostic signs and virtual text settings
     │   ├── keymaps.lua        # Global leader and navigation keymaps
     │   ├── lazy.lua           # Lazy.nvim bootstrapping & setup
@@ -133,10 +144,22 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 | Keymap | Action | Description |
 |---|---|---|
 | `<leader>tr` | `neotest.run.run()` | Run nearest test |
-| `<leader>tf` | `neotest.run.run(file)` | Run all tests in file |
+| `<leader>tf` | `neotest.run.run(file)` | Run all tests in current file |
+| `<leader>td` | `neotest.run.run(dir)` | Run all tests in current directory |
+| `<leader>tl` | `neotest.run.run_last()` | Run last test executed |
+| `<leader>tD` | `neotest.run.run({strategy="dap"})` | Debug nearest test with DAP |
 | `<leader>ts` | `neotest.summary.toggle()` | Toggle test summary tree |
 | `<leader>to` | `neotest.output.open()` | Open test output panel |
 | `<leader>tS` | `neotest.run.stop()` | Stop running test |
+
+### Project Sessions (`<leader>q*`)
+
+| Keymap | Action | Description |
+|---|---|---|
+| `<leader>qq` | Project session save & quit | Save native window layout + dirty buffer snapshots and quit (`qa!`) |
+| `<leader>qs` | Project session save | Save native layout + shadow snapshots without exiting |
+| `<leader>qr` | Project session restore | Restore window layout, files, and unwritten modified buffer contents |
+| `<leader>qd` | Project session delete | Delete saved session and dirty shadow cache for project |
 
 ### NPM Packages (`<leader>p*`)
 
@@ -182,8 +205,8 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 
 | Category | Tools & Servers Managed by Mason |
 |---|---|
-| **LSP** | `ts_ls`, `tailwindcss`, `eslint`, `emmet_language_server`, `gopls`, `clangd`, `pyright`, `intelephense`, `laravel_ls`, `phpactor`, `lua_ls`, `bashls`, `html`, `cssls`, `twiggy_language_server` |
-| **Formatters** | `prettierd`, `goimports`, `shfmt`, `blade-formatter`, `php-cs-fixer`, `tombi`, `twig-cs-fixer`, `beautysh`, `isort`, `black`, `clang-format`, `stylua` |
+| **LSP** | `ts_ls`, `tailwindcss`, `eslint`, `emmet_language_server`, `gopls`, `templ`, `clangd`, `pyright`, `intelephense`, `laravel_ls`, `phpactor`, `lua_ls`, `bashls`, `html`, `cssls`, `twiggy_language_server` |
+| **Formatters** | `prettierd`, `goimports`, `templ`, `shfmt`, `blade-formatter`, `php-cs-fixer`, `tombi`, `twig-cs-fixer`, `beautysh`, `isort`, `black`, `clang-format`, `stylua` |
 | **DAP** | `js-debug-adapter`, `delve` (`dlv`), `lldb-dap`, `gdb` |
 
 ---
