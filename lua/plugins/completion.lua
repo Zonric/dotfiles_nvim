@@ -9,6 +9,7 @@ return {
 				config = function()
 					local luasnip = require("luasnip")
 					luasnip.filetype_extend("cpp", { "c" })
+					luasnip.filetype_extend("templ", { "html" })
 					luasnip.filetype_extend("typescriptreact", { "typescript", "javascriptreact", "javascript" })
 					luasnip.filetype_extend("javascriptreact", { "javascript" })
 					require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" })

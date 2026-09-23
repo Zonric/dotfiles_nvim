@@ -34,6 +34,7 @@ return {
 				python = { "isort", "black" },
 				scss = { "prettierd", "prettier", stop_after_first = true },
 				sh = { "shfmt" },
+				templ = { "templ" },
 				toml = { "tombi" },
 				twig = { "twig-cs-fixer" },
 				typescript = { "prettierd", "prettier", stop_after_first = true },

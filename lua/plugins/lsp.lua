@@ -37,6 +37,100 @@ return {
 				},
 			})
 
+			vim.lsp.config("gopls", {
+				settings = {
+					gopls = {
+						gofumpt = true,
+						analyses = {
+							unusedparams = true,
+							shadow = true,
+							nilness = true,
+							unusedwrite = true,
+							useany = true,
+						},
+						staticcheck = true,
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
+						},
+						semanticTokens = true,
+						usePlaceholders = true,
+						completeUnimported = true,
+					},
+				},
+			})
+
+			vim.lsp.config("html", {
+				filetypes = { "html", "templ" },
+			})
+
+			vim.lsp.config("tailwindcss", {
+				filetypes = {
+					"aspnetcorerazor",
+					"astro",
+					"astro-markdown",
+					"blade",
+					"clojure",
+					"django-html",
+					"htmldjango",
+					"edge",
+					"eelixir",
+					"elixir",
+					"ejs",
+					"erb",
+					"eruby",
+					"gohtml",
+					"gohtmltmpl",
+					"haml",
+					"handlebars",
+					"hbs",
+					"html",
+					"htmlangular",
+					"html-eex",
+					"heex",
+					"jade",
+					"leaf",
+					"liquid",
+					"markdown",
+					"mdx",
+					"mustache",
+					"njk",
+					"nunjucks",
+					"php",
+					"razor",
+					"slim",
+					"twig",
+					"css",
+					"less",
+					"postcss",
+					"sass",
+					"scss",
+					"stylus",
+					"sugarss",
+					"javascript",
+					"javascriptreact",
+					"reason",
+					"rescript",
+					"typescript",
+					"typescriptreact",
+					"vue",
+					"svelte",
+					"templ",
+				},
+				settings = {
+					tailwindCSS = {
+						includeLanguages = {
+							templ = "html",
+						},
+					},
+				},
+			})
+
 			vim.lsp.config("ts_ls", {
 				settings = {
 					typescript = {
@@ -84,6 +178,7 @@ return {
 				"phpactor",
 				"pyright",
 				"tailwindcss",
+				"templ",
 				"ts_ls",
 				"twiggy_language_server",
 			},

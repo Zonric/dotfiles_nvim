@@ -5,9 +5,14 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			ensure_installed = {
+				"go",
+				"gomod",
+				"gosum",
+				"gowork",
 				"javascript",
 				"markdown",
 				"markdown_inline",
+				"templ",
 				"tsx",
 				"typescript",
 			},
