@@ -4,14 +4,66 @@ return {
 		enabled = true,
 		lazy = true,
 		event = "InsertEnter",
-		config = true,
+		opts = {},
+		config = function(_, opts)
+			local npairs = require("nvim-autopairs")
+			local Rule = require("nvim-autopairs.rule")
+
+			npairs.setup(opts)
+			npairs.add_rules({
+				Rule(">[%w%s]*$", "^%s*</", { "templ" })
+					:only_cr()
+					:use_regex(true),
+			})
+		end,
 	},
 	{
 		"windwp/nvim-ts-autotag",
 		enabled = true,
 		lazy = true,
-		event = "InsertEnter",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
+		config = function(_, opts)
+			local autotag = require("nvim-ts-autotag")
+			autotag.setup(opts)
+
+			local TagConfigs = require("nvim-ts-autotag.config.init")
+			local FiletypeConfig = require("nvim-ts-autotag.config.ft")
+
+			local base_cfg = FiletypeConfig:extend(nil, {
+				skip_tag_pattern = {
+					"area",
+					"base",
+					"br",
+					"col",
+					"command",
+					"embed",
+					"hr",
+					"img",
+					"slot",
+					"input",
+					"keygen",
+					"link",
+					"meta",
+					"param",
+					"source",
+					"track",
+					"wbr",
+					"menuitem",
+				},
+			})
+
+			TagConfigs:add(base_cfg:extend("templ", {
+				start_tag_pattern = { "tag_start" },
+				start_name_tag_pattern = { "element_identifier", "name" },
+				end_tag_pattern = { "tag_end" },
+				end_name_tag_pattern = { "element_identifier", "name" },
+				close_tag_pattern = { "tag_end" },
+				close_name_tag_pattern = { "element_identifier", "name" },
+				element_tag = { "element" },
+				skip_tag_pattern = { "quoted_attribute_value", "tag_end", "attribute", "value" },
+			}))
+		end,
 	},
 	{
 		"nvim-mini/mini.surround",
