@@ -19,6 +19,7 @@ return {
 			"zonric/blink-emoji.nvim",
 		},
 		build = function()
+			---@diagnostic disable-next-line: undefined-field
 			require("blink.cmp").build():pwait()
 		end,
 		opts = {
@@ -54,6 +55,8 @@ return {
 					sql = { "dadbod", "snippets", "buffer" },
 					mysql = { "dadbod", "snippets", "buffer" },
 					plsql = { "dadbod", "snippets", "buffer" },
+					codecompanion = { "codecompanion" },
+					codecompanion_input = { "codecompanion" },
 				},
 				providers = {
 					lsp = { name = "LSP" },

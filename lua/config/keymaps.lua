@@ -82,11 +82,18 @@ vim.keymap.set("n", "<C-/>", function()
 end, { desc = "Open Terminal." })
 vim.keymap.set("t", "<C-/>", "<C-\\><C-n><C-w>k", { desc = "Exit Terminal." })
 vim.keymap.set("n", "<C-BS>", "<CMD>noh<CR>", { desc = "Clear Search" })
+
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Navigate to Left Window." })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Navigate Down a Window." })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Navigate Up a Window." })
-vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Display signature helper." })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Navigate to Right Window." })
+
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Navigate to Left Window." })
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Navigate Down a Window." })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Navigate Up a Window." })
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Navigate to Right Window." })
+
+vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Display signature helper." })
 
 -- LuaSnip Jumpable
 vim.keymap.set({ "i", "s" }, "<C-h>", function()
@@ -130,6 +137,19 @@ vim.keymap.set("n", "<S-l>", "<CMD>BufferLineCycleNext<CR>", { desc = "Next Buff
 vim.keymap.set("n", "<leader>\\", function()
 	require("nvim-tree.api").tree.toggle({ focus = true })
 end, { desc = "File Tree" })
+
+vim.api.nvim_create_user_command("CodeCompanionCLIToggle", function()
+	require("codecompanion").toggle_cli()
+end, { desc = "Toggle CodeCompanion CLI terminal." })
+
+wk_add_group("<leader>a", "AI / Antigravity...")
+vim.keymap.set({ "n", "v" }, "<leader>aa", "<CMD>CodeCompanionActions<CR>", { desc = "Action palette." })
+vim.keymap.set({ "n", "v" }, "<leader>ac", "<CMD>CodeCompanionChat Toggle<CR>", { desc = "Toggle chat." })
+vim.keymap.set({ "n", "v" }, "<leader>ai", "<CMD>CodeCompanion<CR>", { desc = "Inline assistant." })
+vim.keymap.set({ "n", "v" }, "<leader>at", function()
+	require("codecompanion").toggle_cli()
+end, { desc = "Toggle Antigravity CLI terminal." })
+vim.keymap.set({ "n", "v" }, "<leader>ap", "<CMD>CodeCompanionCLI Ask<CR>", { desc = "CLI prompt input." })
 
 wk_add_group("<leader>b", "Buffers...")
 vim.keymap.set("n", "<leader>bd", "<CMD>bp|bd#<CR>", { desc = "delete current." })
@@ -304,7 +324,10 @@ local function restore_project_session()
 	local session_file = dir .. "/session.vim"
 
 	if vim.fn.filereadable(session_file) ~= 1 then
-		vim.notify("No saved session for current project: " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t"), vim.log.levels.WARN)
+		vim.notify(
+			"No saved session for current project: " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
+			vim.log.levels.WARN
+		)
 		return
 	end
 

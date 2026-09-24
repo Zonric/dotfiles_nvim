@@ -21,7 +21,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("User", {
 	pattern = "MiniFilesBufferCreate",
 	callback = function(args)
-		vim.keymap.set("n", "<Esc>", function() require("mini.files").close() end, {
+		vim.keymap.set("n", "<Esc>", function()
+			require("mini.files").close()
+		end, {
 			buffer = args.data.buf_id,
 		})
 	end,
@@ -66,4 +68,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-
+-- CodeCompanion settings: line numbers & buffer shortcuts
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "codecompanion", "codecompanion_cli" },
+	callback = function(args)
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+		if args.match == "codecompanion_cli" then
+			vim.keymap.set("n", "q", function()
+				require("codecompanion").toggle_cli()
+			end, { buffer = args.buf, desc = "Hide CLI terminal window." })
+		end
+	end,
+})
