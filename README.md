@@ -28,6 +28,11 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 - **File Management & Sessions**:
   - Both `nvim-tree` (with auto-close on last buffer) and `mini.files` (fast in-buffer navigation).
   - Project session manager (`<leader>q*`) with automatic dirty buffer snapshots to prevent unwritten work loss across restarts.
+- **AI & Antigravity Assistant**:
+  - `codecompanion.nvim` integrated with Google Antigravity CLI (`agy`) via a zero-dependency ACP JSON-RPC 2.0 bridge (`scripts/agy-acp`).
+  - Dedicated chat buffer (`<leader>ac`), inline code transformation (`<leader>ai`), and action palette (`<leader>aa`).
+  - Toggleable terminal CLI pane (`<leader>at`) reusing the running `agy` session without creating duplicate windows, with quick dismissal (`q` in normal mode).
+  - Rich CLI input prompt (`<leader>ap`) with slash commands and context autocompletion through `blink.cmp`.
 
 ---
 
@@ -41,6 +46,8 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 │   └── plans/
 ├── queries/                   # Tree-sitter query overrides and custom extensions
 │   └── templ/                 # Custom HTML/Go indentation query (indents.scm)
+├── scripts/                   # Helper scripts and protocol bridges
+│   └── agy-acp                # Python ACP JSON-RPC 2.0 bridge for Antigravity CLI
 ├── snippets/                  # Custom LuaSnip snippet definitions
 │   ├── c.lua                  # Namespaced include guards, printf, loops
 │   ├── typescript.lua         # Arrow functions, interfaces, types
@@ -53,6 +60,7 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
     │   ├── lazy.lua           # Lazy.nvim bootstrapping & setup
     │   └── options.lua        # Options (tabstop, leaders, UI settings)
     └── plugins/               # Domain-partitioned lazy specs
+        ├── aiagents.lua       # CodeCompanion & Antigravity CLI integration
         ├── codecopy.lua       # Code sharing & remote dev utilities
         ├── completion.lua     # Blink.cmp & LuaSnip configuration
         ├── dap.lua            # DAP adapters & language debug configs
@@ -79,6 +87,17 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 
 **Leader key**: `Space` (`<leader>`)  
 **Local leader key**: `\` (`<localleader>`)
+
+### AI & Antigravity (`<leader>a*`)
+
+| Keymap | Action | Description |
+|---|---|---|
+| `<leader>aa` | `CodeCompanionActions` | Open action palette |
+| `<leader>ac` | `CodeCompanionChat Toggle` | Toggle chat buffer |
+| `<leader>ai` | `CodeCompanion` | Inline code assistant |
+| `<leader>at` | `:CodeCompanionCLIToggle` | Toggle Antigravity CLI terminal |
+| `<leader>ap` | `:CodeCompanionCLI Ask` | CLI prompt input buffer |
+| `q` (CLI buffer) | `:CodeCompanionCLIToggle` | Hide CLI terminal window (normal mode) |
 
 ### Code & LSP (`<leader>c*`)
 
@@ -196,7 +215,7 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 | `]d` / `[d` | `vim.diagnostic` | Next / previous diagnostic |
 | `]h` / `[h` | `gitsigns` | Next / previous git hunk |
 | `]t` / `[t` | `todo-comments` | Next / previous TODO comment |
-| `<C-h/j/k/l>` | Window movement | Move focus between split windows |
+| `<C-h/j/k/l>` | Window movement | Move focus between split windows (normal and terminal mode) |
 | `<C-A-h/j/k/l>` | Window resize | Incrementally resize splits |
 
 ---
