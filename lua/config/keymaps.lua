@@ -34,8 +34,12 @@ vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementa
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Display LSP hover info." })
 
 -- Square bracket keys
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1 })
+end, { desc = "Next diagnostic" })
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1 })
+end, { desc = "Prev diagnostic" })
 vim.keymap.set("n", "]h", function()
 	require("gitsigns").nav_hunk("next")
 end, { desc = "Next git hunk" })
@@ -241,8 +245,8 @@ vim.keymap.set("n", "<leader>ghr", function()
 	require("gitsigns").reset_hunk()
 end, { desc = "Reset hunk." })
 vim.keymap.set("n", "<leader>ghu", function()
-	require("gitsigns").undo_stage_hunk()
-end, { desc = "Undo stage hunk." })
+	require("gitsigns").stage_hunk()
+end, { desc = "Undo / toggle stage hunk." })
 vim.keymap.set("v", "<leader>ghs", function()
 	require("gitsigns").stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 end, { desc = "Stage selected hunk." })
@@ -419,6 +423,7 @@ if not vim.g.is_server then
 		require("neotest").run.stop()
 	end, { desc = "Stop running test." })
 	vim.keymap.set("n", "<leader>tD", function()
+		---@diagnostic disable-next-line: missing-fields
 		require("neotest").run.run({ strategy = "dap" })
 	end, { desc = "Debug nearest test." })
 end

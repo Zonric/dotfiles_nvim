@@ -179,7 +179,7 @@ A fast, modular Neovim configuration built with Lua, tuned for Neovim v0.12+, an
 | `<leader>gp` | `gitsigns.preview_hunk()` | Preview hunk inline |
 | `<leader>ghs` | `gitsigns.stage_hunk()` | Stage hunk (normal/visual) |
 | `<leader>ghr` | `gitsigns.reset_hunk()` | Reset hunk (normal/visual) |
-| `<leader>ghu` | `gitsigns.undo_stage_hunk()`| Undo last stage hunk |
+| `<leader>ghu` | `gitsigns.stage_hunk()` | Toggle / unstage hunk |
 | `<leader>gb` | `fzf-lua.git_branches()` | Switch / inspect git branches |
 | `<leader>gB` | `fzf-lua.git_blame()` | Git blame picker |
 | `<leader>gc` | `fzf-lua.git_commits()` | View git commit logs |
